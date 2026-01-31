@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System.Collections;
 
 [System.Serializable]
 public class InventoryItem
@@ -32,6 +33,11 @@ public class GMPlatformScript : MonoBehaviour
     [Header("UI Referencias")]
     public List<InventorySlot> uiSlots;
 
+    [Header("UI Feedback")]
+    public GameObject notificationPanel;
+    public float displayTime = 3f;
+    private bool notificationShown = false;
+
     [Header("Inventario Local")]
     public List<InventoryItem> inventory = new List<InventoryItem>();
 
@@ -49,6 +55,7 @@ public class GMPlatformScript : MonoBehaviour
     {
         Time.timeScale = 1f;
         ResetUI();
+        notificationShown = false;
         if (Data.GetIsRestarting())
         {
             Data.SetIsRestarting(false);
@@ -60,6 +67,17 @@ public class GMPlatformScript : MonoBehaviour
         }
     }
 
+    void Awake()
+    {
+        // Forzamos que el panel esté apagado antes de cualquier otra cosa
+        if (notificationPanel != null)
+        {
+            notificationPanel.SetActive(false);
+        }
+        
+        // También reseteamos la variable por seguridad
+        notificationShown = false;
+    }
     void ResetUI()
     {
         foreach (var slot in uiSlots)
@@ -102,11 +120,29 @@ public class GMPlatformScript : MonoBehaviour
             inventory.Add(newItem);
 
             UpdateSlotUI(category, correct, false);
+
+            if (inventory.Count >= maxItems && !notificationShown)
+            {
+                StartCoroutine(ShowNotificationRoutine());
+            }
             return true;
         }
         return false;
     }
 
+    private IEnumerator ShowNotificationRoutine()
+    {
+        notificationShown = true;
+        if (notificationPanel != null)
+        {
+            notificationPanel.SetActive(true);
+            
+            // Espera unos segundos (displayTime)
+            yield return new WaitForSeconds(displayTime);
+            
+            notificationPanel.SetActive(false);
+        }
+    }
     public void PlayerHit(Vector2 hitDirection)
     {
         List<InventoryItem> itemsToRemove = new List<InventoryItem>();
@@ -133,6 +169,7 @@ public class GMPlatformScript : MonoBehaviour
         // 3. Procesamos los objetos que deben ser eliminados y reaparecer
         if (itemsToRemove.Count > 0)
         {
+            notificationShown = false;
             foreach (var itemDead in itemsToRemove)
             {
                 string cat = itemDead.category;
@@ -200,6 +237,12 @@ public class GMPlatformScript : MonoBehaviour
     public void SetInFinishZone(bool value)
     {
         isInFinishZone = value;
+
+        if (isInFinishZone && inventory.Count >= maxItems)
+        {
+            Debug.Log("Zona de meta alcanzada con todos los items. Finalizando automáticamente...");
+            CheckVictory(); 
+        }
     }
 
     // --- AQUÍ ESTÁ LA MAGIA ---
@@ -223,7 +266,7 @@ public class GMPlatformScript : MonoBehaviour
         return score;
     }
 
-    public void FinishButton()
+    public void CheckVictory()
     {
         // CONDICIÓN DE VICTORIA
         if (isInFinishZone && inventory.Count >= maxItems)
