@@ -12,6 +12,12 @@ public class JohnMovement : MonoBehaviour
 
     public float JumpForce = 5f;
     public float Speed = 2f;
+    [Header("Efecto de Daño")]
+    public float knockbackForce = 10f;
+    public GMPlatformScript gameManager;
+
+    public float invulnerabilityTime = 1.5f;
+    private bool isInvulnerable = false;
     void Start()
     {
      Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -60,4 +66,39 @@ public class JohnMovement : MonoBehaviour
         Rigidbody2D.linearVelocity = new Vector2(Horizontal * Speed, Rigidbody2D.linearVelocity.y);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy") && !isInvulnerable)
+        {
+            // 1. Calculamos dirección contraria al golpe
+            Vector2 damageDirection = (transform.position - collision.transform.position).normalized;
+            
+            // 2. Aplicamos fuerza de salto/retroceso
+            Rigidbody2D.linearVelocity = Vector2.zero; // Limpiamos velocidad actual
+            Rigidbody2D.AddForce(new Vector2(damageDirection.x, 1f) * knockbackForce, ForceMode2D.Impulse);
+            
+            // 3. Avisamos al GameManager
+            gameManager.PlayerHit(damageDirection);
+
+            StartCoroutine(BecomeInvulnerable());
+        }
+    }
+
+    private IEnumerator BecomeInvulnerable()
+    {
+        isInvulnerable = true;
+        
+        // OPCIONAL: Efecto visual de parpadeo
+        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
+        float timer = 0;
+        while (timer < invulnerabilityTime)
+        {
+            sprite.enabled = !sprite.enabled; // Parpadea
+            yield return new WaitForSeconds(0.1f);
+            timer += 0.1f;
+        }
+        
+        sprite.enabled = true; // Aseguramos que quede visible
+        isInvulnerable = false;
+    }
 }
