@@ -8,7 +8,7 @@ public class InventoryItem
     public string itemName;
     public string category;
     public bool isCorrect;
-    public int status;
+    public int status; // 3 = Intacto, <3 = Dañado
 
     public InventoryItem(string name, string cat, bool correct)
     {
@@ -33,7 +33,6 @@ public class GMPlatformScript : MonoBehaviour
     public List<InventoryItem> inventory = new List<InventoryItem>();
 
     public int maxItems = 3;
-
     public List<string> correctItemNames = new List<string>();
 
     private bool isGameOver = false;
@@ -62,6 +61,7 @@ public class GMPlatformScript : MonoBehaviour
             slot.CleanSlot();
         }
     }
+
     void Update()
     {
         if (isGameOver || isPaused) return;
@@ -73,7 +73,7 @@ public class GMPlatformScript : MonoBehaviour
         else
         {
             Data.timeLeft = 0;
-            GameOver();
+            GameOver(); // Se acabó el tiempo
         }
     }
 
@@ -100,17 +100,15 @@ public class GMPlatformScript : MonoBehaviour
     {
         bool foundSomethingToBreak = false;
 
-        // Buscamos el primero que sea correcto y no esté dañado
         foreach (var item in inventory)
         {
             if (item.isCorrect)
             {
                 item.status -= 1;
-                
                 UpdateSlotUI(item.category, item.isCorrect, true);
-                
                 foundSomethingToBreak = true;
                 Debug.Log("¡Se rompió!: " + item.category);
+                // Opcional: Si el status llega a 0, ¿deja de contar como punto?
             }
         }
 
@@ -144,12 +142,55 @@ public class GMPlatformScript : MonoBehaviour
         isInFinishZone = value;
     }
 
+    // --- AQUÍ ESTÁ LA MAGIA ---
+    // Función auxiliar para saber cuántos puntos ganó el jugador
+    int CalculateFinalScore()
+    {
+        int score = 0;
+        foreach (var item in inventory)
+        {
+            // Solo damos puntos si el objeto es el CORRECTO
+            if (item.isCorrect)
+            {
+                // Sumamos el 'status' (ej: si está intacto suma 3, si está roto suma 1 o 2)
+                // Esto permite que el diálogo cambie si el jugador llegó muy golpeado
+                if (item.status > 0) 
+                {
+                    score += item.status; 
+                }
+            }
+        }
+        return score;
+    }
+
     public void FinishButton()
     {
+        // CONDICIÓN DE VICTORIA
         if (isInFinishZone && inventory.Count >= maxItems)
         {
             Debug.Log("¡Nivel Completado!");
-            GameOver();
+            isGameOver = true; // Frenamos el juego
+
+            // 1. Calculamos el puntaje
+            int finalScore = CalculateFinalScore();
+
+            // 2. Contactamos al Manager
+            if (QuestFlowManager.Instance != null)
+            {
+                // Le pasamos los datos
+                QuestFlowManager.Instance.lastPointReached = finalScore;
+                QuestFlowManager.Instance.questCompleted = true; // Avisamos que volvemos con éxito
+                
+                // 3. ¡SOLO CARGAMOS LA ESCENA!
+                // No llamamos a EndDialogueManager todavía. Eso lo hará el texto cuando termine de leerse.
+                UnityEngine.SceneManagement.SceneManager.LoadScene("QuestScene"); 
+            }
+            else
+            {
+                // Fallback
+                Debug.LogWarning("No se encontró QuestFlowManager...");
+                UnityEngine.SceneManagement.SceneManager.LoadScene("QuestScene");
+            }
         }
         else if (!isInFinishZone)
         {
@@ -165,7 +206,8 @@ public class GMPlatformScript : MonoBehaviour
     {
         Time.timeScale = 1f;
         Data.SetIsRestarting(true);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        // Usamos la ruta completa para evitar el error de nombres que tenías antes
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
     public void PauseButton()
@@ -177,9 +219,21 @@ public class GMPlatformScript : MonoBehaviour
 
     void GameOver()
     {
+        // Esto pasa si se acaba el tiempo (perder)
         isGameOver = true;
-        Time.timeScale = 1f;
-        UnityEngine.SceneManagement.SceneManager.LoadScene("QuestScene");
-        Debug.Log("El juego ha terminado.");
+        Debug.Log("Se acabó el tiempo.");
+        
+        // AQUÍ DECIDES: 
+        // Opción A: Reiniciar el nivel automáticamente
+        RestartButton();
+
+        // Opción B: Volver al QuestScene diciendo que fallaste (0 puntos)
+        /*
+        if (QuestFlowManager.Instance != null) {
+             QuestFlowManager.Instance.lastPointReached = 0;
+             QuestFlowManager.Instance.questCompleted = true; 
+             QuestFlowManager.Instance.EndDialogueManager();
+        }
+        */
     }
 }

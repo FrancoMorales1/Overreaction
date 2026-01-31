@@ -15,6 +15,10 @@ public class DialogueControllerScript : MonoBehaviour
 
     void Start()
     {
+        if (QuestFlowManager.Instance != null)
+        {
+            currentQuest = QuestFlowManager.Instance.GetDialogueForCurrentMission();
+        }
         dialogueLines = new Queue<string>();
         StartDialogue();
     }
@@ -52,13 +56,9 @@ public class DialogueControllerScript : MonoBehaviour
     void EndDialogue()
     {
        Debug.Log("Dialogue ended.");
-       if (!string.IsNullOrEmpty(currentQuest.nameNextScene))
-       {
-           UnityEngine.SceneManagement.SceneManager.LoadScene(currentQuest.nameNextScene);
-       }
-       else 
-       {
-           Debug.Log("No next scene specified.");//esto revisar si vale la pena
-       }
+        if (QuestFlowManager.Instance != null)
+        {
+            QuestFlowManager.Instance.EndDialogueManager();
+        }
     }
 }

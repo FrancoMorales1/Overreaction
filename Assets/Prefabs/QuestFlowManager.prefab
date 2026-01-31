@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2690134957672022282
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9136173007928194392}
+  - component: {fileID: 8643440714562067181}
+  m_Layer: 0
+  m_Name: QuestFlowManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9136173007928194392
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2690134957672022282}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1678.2532, y: 293.28604, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8643440714562067181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2690134957672022282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77f9c2327259d4b4f8562c0b9c88763b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestFlowManager
+  missionList:
+  - name: AdolfMission
+    dialogueIntro: {fileID: 11400000, guid: 6974fbc1bc93f2644b48b0733c821658, type: 2}
+    levelSceneName: FirstLevelScene
+    GoodEnd: {fileID: 11400000, guid: be861182d43d3384f8e38bc3ebf45a4d, type: 2}
+    OkEnd: {fileID: 11400000, guid: 886d892950b048445aec8483f901b2a7, type: 2}
+    BadEnd: {fileID: 11400000, guid: b58b9348a0a53cd498bc7f171c5c570d, type: 2}
+  - name: AlanMission
+    dialogueIntro: {fileID: 11400000, guid: ec9bffd851ad9ae47b5005c6c0146e72, type: 2}
+    levelSceneName: SecondLevelScene
+    GoodEnd: {fileID: 11400000, guid: 6e5aa62ebbdb7014a84e943275f1f146, type: 2}
+    OkEnd: {fileID: 11400000, guid: 6bc20fdb863d88445830c83e0399acd2, type: 2}
+    BadEnd: {fileID: 11400000, guid: 1ff5c5c2d698f444eac3bf79e35fb2f9, type: 2}
+  - name: MaiteMission
+    dialogueIntro: {fileID: 11400000, guid: 7a0f0b9b12d7f884da85a309a4382998, type: 2}
+    levelSceneName: ThirdLevelScene
+    GoodEnd: {fileID: 11400000, guid: 2613bb9bfe3b6004c873677ed5d02822, type: 2}
+    OkEnd: {fileID: 11400000, guid: b65748fd12530804098743b5743807b1, type: 2}
+    BadEnd: {fileID: 11400000, guid: 514f62a813b3c694f862f0c0d47768ba, type: 2}
+  indexCurrentMission: 0
+  lastPointReached: 0
+  questCompleted: 0
