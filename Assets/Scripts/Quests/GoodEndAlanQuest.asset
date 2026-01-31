@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DataDialogueScript
   npcImage: {fileID: 0}
   npcName: Alan
-  dialogueLines: []
-  nameNextScene: 
+  dialogueLines:
+  - '*Se Sonroja*.... *se retira*'
+  nameNextScene: QuestScene

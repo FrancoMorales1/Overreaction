@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: OkEndAlanQuest
   m_EditorClassIdentifier: Assembly-CSharp::DataDialogueScript
   npcImage: {fileID: 0}
-  npcName: 
-  dialogueLines: []
-  nameNextScene: 
+  npcName: Alan
+  dialogueLines:
+  - ... *Golpea el pizarron* ....
+  nameNextScene: QuestScene

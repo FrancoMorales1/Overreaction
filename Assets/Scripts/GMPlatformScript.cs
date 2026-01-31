@@ -238,6 +238,8 @@ public class GMPlatformScript : MonoBehaviour
                 QuestFlowManager.Instance.lastPointReached = finalScore;
                 QuestFlowManager.Instance.questCompleted = true; // Avisamos que volvemos con éxito
                 
+
+                QuestFlowManager.Instance.AdjustReputation(finalScore);
                 // 3. ¡SOLO CARGAMOS LA ESCENA!
                 // No llamamos a EndDialogueManager todavía. Eso lo hará el texto cuando termine de leerse.
                 UnityEngine.SceneManagement.SceneManager.LoadScene("QuestScene"); 
