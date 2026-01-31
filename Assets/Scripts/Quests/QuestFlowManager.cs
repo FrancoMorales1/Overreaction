@@ -107,7 +107,7 @@ public class QuestFlowManager : MonoBehaviour
         if (current == null) return;
         if (!questCompleted)
         {
-            SceneManager.LoadScene(current.levelSceneName);
+            TransitionManager.Instance.LoadSceneWithTransition(current.levelSceneName);
         }
         else
         {
@@ -117,7 +117,7 @@ public class QuestFlowManager : MonoBehaviour
 
             if (indexCurrentMission < missionList.Count)
             {
-                SceneManager.LoadScene("QuestScene");
+                TransitionManager.Instance.LoadSceneWithTransition("QuestScene");
             }
             else
             {

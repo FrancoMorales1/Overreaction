@@ -35,6 +35,9 @@ public class GMPlatformScript : MonoBehaviour
     [Header("Inventario Local")]
     public List<InventoryItem> inventory = new List<InventoryItem>();
 
+    [Header("UI Pause")]
+    public GameObject pausePanel;
+
     public int maxItems = 3;
     public List<string> correctItemNames = new List<string>();
 
@@ -272,8 +275,26 @@ public class GMPlatformScript : MonoBehaviour
     public void PauseButton()
     {
         isPaused = !isPaused;
-        Time.timeScale = isPaused ? 0f : 1f; 
-        Debug.Log(isPaused ? "Juego Pausado" : "Juego Reanudado");
+        
+        if (isPaused)
+        {
+            Time.timeScale = 0f; // Congela el tiempo
+            if(pausePanel != null) pausePanel.SetActive(true); // Muestra el menú
+            Debug.Log("Juego Pausado");
+        }
+        else
+        {
+            Time.timeScale = 1f; // Reanuda el tiempo
+            if(pausePanel != null) pausePanel.SetActive(false); // Oculta el menú
+            Debug.Log("Juego Reanudado");
+        }
+    }
+
+    public void ExitToMenu()
+    {
+        Time.timeScale = 1f;
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenuScene");
     }
 
     void GameOver()
