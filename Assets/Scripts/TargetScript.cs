@@ -5,8 +5,9 @@ public class TargetScript : MonoBehaviour
     [Header("Referencias")]
     public GMPlatformScript gameManager; 
 
-    [Header("Configuración del Objeto")]
+    [Header("Configuracion del Objeto")]
     public string itemName;
+    public string itemCategory;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -14,12 +15,10 @@ public class TargetScript : MonoBehaviour
         {
             if (gameManager != null)
             {
-                gameManager.AddItem(itemName);
-                Destroy(gameObject);
-            }
-            else
-            {
-                Debug.LogWarning("¡Te olvidaste de asignar el GameManager en el objeto " + gameObject.name + "!");
+                if(gameManager.AddItem(itemName, itemCategory)) 
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }
