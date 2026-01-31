@@ -52,7 +52,14 @@ public class GMPlatformScript : MonoBehaviour
         }
     }
 
-    public void ClickBotonReinicio()
+    public void Finish()
+    {
+        Data.SetIsRestarting(true);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void Restart()
     {
         Data.SetIsRestarting(true);
 

@@ -27,11 +27,11 @@ public class JohnMovement : MonoBehaviour
         }
         if (Horizontal < 0.0f)
         {
-            transform.localScale = new Vector3(-5f, 5f, 5f);
+            transform.localScale = new Vector3(-4f, 4f, 4f);
         }
         else if (Horizontal > 0.0f)
         {
-            transform.localScale = new Vector3(5f, 5f, 5f);
+            transform.localScale = new Vector3(4f, 4f, 4f);
         }
 
         Debug.DrawRay(transform.position, Vector2.down * 0.6f, Color.blue);      

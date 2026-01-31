@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "NuevosDatos", menuName = "Juego/DatosJugador")]
+[CreateAssetMenu(fileName = "TempData", menuName = "Juego/DatosJugador")]
 public class TempData : ScriptableObject
 {
     public float totalTime;
