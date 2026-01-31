@@ -56,14 +56,14 @@ public class GMPlatformScript : MonoBehaviour
     {
         Data.SetIsRestarting(true);
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
     public void Restart()
     {
         Data.SetIsRestarting(true);
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
     void GameOver()
