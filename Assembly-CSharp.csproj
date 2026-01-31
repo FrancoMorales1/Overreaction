@@ -48,7 +48,15 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.6f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Player.cs" />
+    <Compile Include="Assets\Scripts\TempPlatformData.cs" />
+    <Compile Include="Assets\Scripts\GMPlatformScript.cs" />
+    <Compile Include="Assets\Scripts\FollowerEnemyScript.cs" />
+    <Compile Include="Assets\Scripts\LinearEnemyScript.cs" />
+    <Compile Include="Assets\Scripts\PlayerScript.cs" />
+    <Compile Include="Assets\Scripts\TargetScript.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\SpriteSheets\brackeys_platformer_assets\LICENSE &amp; CREDITS.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
