@@ -9,6 +9,11 @@ public class TargetScript : MonoBehaviour
     public string itemName;
     public string itemCategory;
 
+    private void Start()
+    {
+        if (gameManager != null) gameManager.RegisterWorldItem(this);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -17,7 +22,7 @@ public class TargetScript : MonoBehaviour
             {
                 if(gameManager.AddItem(itemName, itemCategory)) 
                 {
-                    Destroy(gameObject);
+                    gameObject.SetActive(false);
                 }
             }
         }

@@ -26,6 +26,9 @@ public class GMPlatformScript : MonoBehaviour
     [Header("Configuración Respawn")]
     public Transform respawnPoint;
 
+    [Header("Referencias del Mundo")]
+    public List<TargetScript> allWorldItems = new List<TargetScript>();
+
     [Header("UI Referencias")]
     public List<InventorySlot> uiSlots;
 
@@ -77,6 +80,11 @@ public class GMPlatformScript : MonoBehaviour
         }
     }
 
+    public void RegisterWorldItem(TargetScript item) 
+    {
+        if(!allWorldItems.Contains(item)) allWorldItems.Add(item);
+    }
+
     public bool AddItem(string name, string category)
     {
         foreach (var item in inventory)
@@ -98,21 +106,62 @@ public class GMPlatformScript : MonoBehaviour
 
     public void PlayerHit(Vector2 hitDirection)
     {
-        bool foundSomethingToBreak = false;
+        List<InventoryItem> itemsToRemove = new List<InventoryItem>();
+        bool atLeastOneWasCorrect = false;
 
         foreach (var item in inventory)
         {
-            if (item.isCorrect)
+            if (item.isCorrect && item.status > 0)
             {
+                atLeastOneWasCorrect = true;
                 item.status -= 1;
-                UpdateSlotUI(item.category, item.isCorrect, true);
-                foundSomethingToBreak = true;
+                if (item.status <= 0)
+                {
+                    itemsToRemove.Add(item);
+                } else
+                {
+                    UpdateSlotUI(item.category, item.isCorrect, true);
+                }
                 Debug.Log("¡Se rompió!: " + item.category);
                 // Opcional: Si el status llega a 0, ¿deja de contar como punto?
             }
         }
 
-        if (!foundSomethingToBreak) RespawnPlayer();
+        // 3. Procesamos los objetos que deben ser eliminados y reaparecer
+        if (itemsToRemove.Count > 0)
+        {
+            foreach (var itemDead in itemsToRemove)
+            {
+                string cat = itemDead.category;
+                string name = itemDead.itemName;
+
+                // Quitar del inventario lógico
+                inventory.Remove(itemDead);
+
+                // Limpiar su slot en la UI
+                foreach (var slot in uiSlots)
+                {
+                    if (slot.category == cat) { slot.CleanSlot(); break; }
+                }
+
+                // Reaparecer el objeto en el mapa
+                foreach (var worldItem in allWorldItems)
+                {
+                    if (worldItem.itemName == name && worldItem.itemCategory == cat)
+                    {
+                        worldItem.gameObject.SetActive(true);
+                        Debug.Log($"Reapareciendo {name} en el mundo.");
+                        break;
+                    }
+                }
+            }
+        }
+
+        // 4. Si John no tenía NINGÚN objeto correcto sano al ser golpeado
+        if (!atLeastOneWasCorrect)
+        {
+            RespawnPlayer();
+        }
     }
 
     private void UpdateSlotUI(string category, bool isCorrect, bool isDamaged)
@@ -133,8 +182,16 @@ public class GMPlatformScript : MonoBehaviour
         if (player != null && respawnPoint != null)
         {
             player.transform.position = respawnPoint.position;
-            Debug.Log("Sin objetos sanos. Volviendo al inicio.");
-        }
+
+            Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector2.zero;
+                rb.angularVelocity = 0f;
+            }
+
+            Debug.Log("Sin objetos sanos. Volviendo al inicio sin impulso.");
+        }   
     }
 
     public void SetInFinishZone(bool value)

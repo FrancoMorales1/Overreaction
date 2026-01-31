@@ -70,15 +70,22 @@ public class JohnMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy") && !isInvulnerable)
         {
-            // 1. Calculamos dirección contraria al golpe
-            Vector2 damageDirection = (transform.position - collision.transform.position).normalized;
+            // 1. Calculamos si el enemigo está a la izquierda o derecha
+            // Si la resta da positivo, el enemigo está a la izquierda (saltamos a la derecha)
+            // Si da negativo, el enemigo está a la derecha (saltamos a la izquierda)
+            float side = transform.position.x - collision.transform.position.x;
+            float directionX = Mathf.Sign(side); // Esto nos da 1 o -1
+
+            // 2. Creamos un vector de 45 grados (1 en X, 1 en Y)
+            // Lo normalizamos para que la fuerza total sea siempre constante
+            Vector2 knockbackDir = new Vector2(directionX, 1f).normalized;
             
-            // 2. Aplicamos fuerza de salto/retroceso
-            Rigidbody2D.linearVelocity = Vector2.zero; // Limpiamos velocidad actual
-            Rigidbody2D.AddForce(new Vector2(damageDirection.x, 1f) * knockbackForce, ForceMode2D.Impulse);
+            // 3. Aplicamos el golpe
+            Rigidbody2D.linearVelocity = Vector2.zero; // Frenamos cualquier movimiento previo
+            Rigidbody2D.AddForce(knockbackDir * knockbackForce, ForceMode2D.Impulse);
             
-            // 3. Avisamos al GameManager
-            gameManager.PlayerHit(damageDirection);
+            // 4. Avisamos al GameManager (enviando el vector por si lo necesitas)
+            gameManager.PlayerHit(knockbackDir);
 
             StartCoroutine(BecomeInvulnerable());
         }
