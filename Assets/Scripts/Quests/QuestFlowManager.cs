@@ -143,7 +143,14 @@ public class QuestFlowManager : MonoBehaviour
             }
             else
             {
-                TransitionManager.Instance.LoadSceneWithTransition("EndingScene");
+                if (TransitionManager.Instance != null)
+                {
+                    TransitionManager.Instance.LoadSceneWithBlink("EndingScene");
+                }
+                else
+                {
+                    SceneManager.LoadScene("EndingScene");
+                }
             }
         }
 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429a7e6a573baaf408bdb26bf4fa63cf, type: 3}
   m_Name: OkEndAndreaQuest
   m_EditorClassIdentifier: Assembly-CSharp::DataDialogueScript
-  npcImage: {fileID: 0}
+  npcImage: {fileID: -3071858011722858061, guid: 45dd63982a4a0c34494c4b0099892483, type: 3}
   npcName: Andrea
   dialogueLines:
   - Player =  Ahh...

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429a7e6a573baaf408bdb26bf4fa63cf, type: 3}
   m_Name: BadEndRaulQuest
   m_EditorClassIdentifier: Assembly-CSharp::DataDialogueScript
-  npcImage: {fileID: 0}
+  npcImage: {fileID: -2768480586606461467, guid: 378430950fe0bf3449dea2460e7b4de7, type: 3}
   npcName: Raul
   dialogueLines:
   - Player =  BUAAAAAAA
