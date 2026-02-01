@@ -126,15 +126,24 @@ public class QuestFlowManager : MonoBehaviour
             indexCurrentMission++;
             questCompleted = false;
             lastPointReached = 0;
+            ResetFace();
 
             if (indexCurrentMission < missionList.Count)
             {
-                TransitionManager.Instance.LoadSceneWithTransition("QuestScene");
+                TransitionManager.Instance.Blink(() =>
+                {
+                    DialogueControllerScript dialogController = FindFirstObjectByType<DialogueControllerScript>();
+                    if (dialogController != null)
+                    {
+                        dialogController.StartNewQuestFormManager();
+                    }
+                    FaceCompositeUI faceUI = FindFirstObjectByType<FaceCompositeUI>();
+                    if (faceUI != null) faceUI.UpdateFaceUI();
+                });
             }
             else
             {
-                Debug.Log("All missions completed!");
-                SceneManager.LoadScene("MainMenuScene");
+                TransitionManager.Instance.LoadSceneWithTransition("EndingScene");
             }
         }
 
