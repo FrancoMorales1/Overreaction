@@ -11,6 +11,7 @@ public class InventoryItem
     public string category;
     public bool isCorrect;
     public Sprite itemIcon;
+    public Sprite itemSprite;
 
     public InventoryItem(string name, string cat, bool correct)
     {
@@ -30,6 +31,10 @@ public class InventoryItem
         {
             Debug.LogError($"No se encontraron imágenes en: Resources/{path}. Revisa que el nombre de la carpeta coincida con la categoría.");
         }
+
+        string spritePath = "ItemsSprite/" + cat + "/"+ name;
+        itemSprite = Resources.Load<Sprite>(spritePath);
+
     }
 
     public void CorruptItem()
@@ -58,6 +63,9 @@ public class InventoryItem
         {
             itemIcon = categorySprites[Random.Range(0, categorySprites.Length)];
         }
+
+        string spritePath = "ItemsSprite/" + category + "/"+ itemName;
+        itemSprite = Resources.Load<Sprite>(spritePath);
     }
 }
 
@@ -73,6 +81,7 @@ public class GMPlatformScript : MonoBehaviour
 
     [Header("UI Referencias")]
     public List<InventorySlot> uiSlots;
+    public List<InventoryHaveScript> haveSlots;
 
     [Header("UI Feedback")]
     public GameObject notificationPanel;
@@ -124,10 +133,8 @@ public class GMPlatformScript : MonoBehaviour
     }
     void ResetUI()
     {
-        foreach (var slot in uiSlots)
-        {
-            slot.CleanSlot();
-        }
+        foreach (var slot in uiSlots) slot.CleanSlot();
+        foreach (var hSlot in haveSlots) hSlot.CleanSlot(); // Limpiamos la nueva lista
     }
 
     void Update()
@@ -175,7 +182,7 @@ public class GMPlatformScript : MonoBehaviour
             InventoryItem newItem = new InventoryItem(name, category, correct);
             inventory.Add(newItem);
 
-            UpdateSlotUI(category, correct);
+            UpdateSlotUI(category, correct, newItem.itemSprite);
 
             if (inventory.Count >= maxItems && !notificationShown)
             {
@@ -211,7 +218,7 @@ public class GMPlatformScript : MonoBehaviour
 
                 inventory[i].CorruptItem();
                 
-                UpdateSlotUI(inventory[i].category, inventory[i].isCorrect);
+                UpdateSlotUI(inventory[i].category, inventory[i].isCorrect, inventory[i].itemSprite);
                 
                 Debug.Log($"¡Item dañado! Ahora es incorrecto: {inventory[i].itemName}");
 
@@ -225,13 +232,23 @@ public class GMPlatformScript : MonoBehaviour
         }
     }
 
-    private void UpdateSlotUI(string category, bool isCorrect)
+    private void UpdateSlotUI(string category, bool isCorrect, Sprite currentSprite)
     {
+        Debug.Log($"Actualizando UI para categoría: {category}, Correcto: {isCorrect}, Sprite: {currentSprite}");
         foreach (var slot in uiSlots)
         {
             if (slot.category == category)
             {
                 slot.SetStatus(isCorrect);
+                break;
+            }
+        }
+
+        foreach (var hSlot in haveSlots)
+        {
+            if (hSlot.category == category)
+            {
+                hSlot.SetItem(currentSprite);
                 break;
             }
         }
@@ -319,7 +336,7 @@ public class GMPlatformScript : MonoBehaviour
 
         Time.timeScale = 1f;
         AudioManager.Instance.PlayMenuMusic();
-        
+
         Debug.Log("¡Nivel Completado!");
         // 1. Calculamos el puntaje
         int finalScore = CalculateFinalScore();
@@ -411,7 +428,7 @@ public class GMPlatformScript : MonoBehaviour
                 fakeItem.CorruptItem(); 
                 
                 inventory.Add(fakeItem);
-                UpdateSlotUI(cat, false);
+                UpdateSlotUI(cat, false, fakeItem.itemSprite);
                 Debug.Log($"Generado item de relleno incorrecto para: {cat}");
             }
         }

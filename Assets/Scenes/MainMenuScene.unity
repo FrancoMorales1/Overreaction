@@ -1276,6 +1276,10 @@ PrefabInstance:
       propertyPath: bottomEyelid
       value: 
       objectReference: {fileID: 1873754783}
+    - target: {fileID: 5208963681874763219, guid: 109c269dc0b7d4e44977c5ed590971b7, type: 3}
+      propertyPath: transitionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: eedb186882c2d804fb983388f3d0a219, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

@@ -19,6 +19,9 @@ public class TransitionManager : MonoBehaviour
     public float transitionSpeed = 1.0f;
     public float blinkSpeed = 0.3f;
 
+    public AudioClip transitionSound;
+    public float deliveryVolume = 1f;
+    
     void Awake()
     {
         if (Instance == null)
@@ -105,7 +108,16 @@ public class TransitionManager : MonoBehaviour
     IEnumerator MovePanel(float startX, float endX)
     {
         float elapsedTime = 0f;
-        
+
+        if (transitionSound != null)
+        {
+            Debug.Log("Reproduciendo sonido de transición.");
+            Vector3 spawnPos = Camera.main.transform.position;
+            spawnPos.z = Camera.main.transform.position.z + 1f;
+
+            AudioSource.PlayClipAtPoint(transitionSound, spawnPos, deliveryVolume);
+        }
+
         // Aseguramos la posición inicial antes de empezar el bucle
         transitionPanel.anchoredPosition = new Vector2(startX, 0);
 
