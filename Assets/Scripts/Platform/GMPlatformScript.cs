@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 [System.Serializable]
 public class InventoryItem
@@ -9,7 +10,7 @@ public class InventoryItem
     public string itemName;
     public string category;
     public bool isCorrect;
-    public int status = 3; // 3 = intacto, 2 = dañado, 1 = muy dañado, 0 = roto
+    public int status = 3;
     public Sprite itemIcon;
 
     public InventoryItem(string name, string cat, bool correct)
@@ -18,7 +19,7 @@ public class InventoryItem
         category = cat;
         isCorrect = correct;
         status = 3;
-        string path = "Items/" + cat;
+        string path = "Items/" + cat + "/"+ name;
 
         Sprite[] categorySprites = Resources.LoadAll<Sprite>(path);
 
@@ -102,6 +103,18 @@ public class GMPlatformScript : MonoBehaviour
 
     void Update()
     {
+        if (Keyboard.current != null)
+        {
+            if (Keyboard.current.rKey.wasPressedThisFrame)
+            {
+                RestartButton();
+            }
+
+            if (Keyboard.current.pKey.wasPressedThisFrame)
+            {
+                PauseButton();
+            }
+        }
         if (isGameOver || isPaused) return;
 
         if (Data.timeLeft > 0)
@@ -111,7 +124,7 @@ public class GMPlatformScript : MonoBehaviour
         else
         {
             Data.timeLeft = 0;
-            GameOver(); // Se acabó el tiempo
+            GameOver();
         }
     }
 
@@ -211,7 +224,6 @@ public class GMPlatformScript : MonoBehaviour
             }
         }
 
-        // 4. Si John no tenía NINGÚN objeto correcto sano al ser golpeado
         if (!atLeastOneWasCorrect)
         {
             RespawnPlayer();
@@ -295,6 +307,12 @@ public class GMPlatformScript : MonoBehaviour
                 QuestFlowManager.Instance.lastPointReached = finalScore;
                 QuestFlowManager.Instance.questCompleted = true; // Avisamos que volvemos con éxito
                 
+                foreach (var item in inventory)
+                {
+                    if (item.category == "Cejas") QuestFlowManager.Instance.faceBrows = item.itemIcon;
+                    else if (item.category == "Ojos") QuestFlowManager.Instance.faceEyes = item.itemIcon;
+                    else if (item.category == "Boca") QuestFlowManager.Instance.faceMouth = item.itemIcon;
+                }
 
                 QuestFlowManager.Instance.AdjustReputation(finalScore);
                 // 3. ¡SOLO CARGAMOS LA ESCENA!
