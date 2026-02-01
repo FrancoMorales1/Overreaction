@@ -10,12 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 429a7e6a573baaf408bdb26bf4fa63cf, type: 3}
-  m_Name: StartMaiteQuest
+  m_Name: BadEndRaulQuest
   m_EditorClassIdentifier: Assembly-CSharp::DataDialogueScript
   npcImage: {fileID: 0}
-  npcName: Maite
+  npcName: Adolf
   dialogueLines:
-  - Hola, me llamo Maite..
-  - ... Flaqui estuvo rompiedome cosas en casa... Panchito ademas....
-  - .. y encima Alan me esta mirando raro hace media hora...
-  nameNextScene: SecondLevelScene
+  - Me parece que con esa actitud a vos te voy a hacer jabon...
+  nameNextScene: QuestScene
