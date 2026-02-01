@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GoodEndAndreaQuest
   m_EditorClassIdentifier: Assembly-CSharp::DataDialogueScript
   npcImage: {fileID: 0}
-  npcName: Maite
+  npcName: Andrea
   dialogueLines:
-  - Si.. Viste.. todo muy raro..
-  - Bueno.. me voy..
+  - Player = No te lo merecias, si necesitas un oido aca estoy...
+  - Andrea = Gracias... Sos un gran AMIGO...
   nameNextScene: QuestScene

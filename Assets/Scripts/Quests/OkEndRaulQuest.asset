@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: OkEndRaulQuest
   m_EditorClassIdentifier: Assembly-CSharp::DataDialogueScript
   npcImage: {fileID: 0}
-  npcName: Adolf
+  npcName: Raul
   dialogueLines:
-  - No entendi tanto tu respuesta, pero bueno, por hoy zafas...
+  - Player = ...LOL...
+  - Raul = ... Estas mal de la cabeza...
   nameNextScene: QuestScene

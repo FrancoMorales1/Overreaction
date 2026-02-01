@@ -22,6 +22,18 @@ public class QuestFlowManager : MonoBehaviour
         public DataDialogueScript BadEnd;
     }
 
+    [Header("Face Composite System")]
+    public Sprite faceBrows;
+    public Sprite faceEyes;
+    public Sprite faceMouth;
+
+    public void ResetFace()
+    {
+        faceBrows = null;
+        faceEyes = null;
+        faceMouth = null;
+    }
+
     public List<Mission> missionList;
     public int indexCurrentMission = 0;
     public int lastPointReached = 0;
@@ -60,7 +72,7 @@ public class QuestFlowManager : MonoBehaviour
                 {
                     return currentMission.GoodEnd;
                 }
-                else if (lastPointReached >= 3)
+                else if (lastPointReached > 3)
                 {
                     return currentMission.OkEnd;
                 }
@@ -82,18 +94,18 @@ public class QuestFlowManager : MonoBehaviour
         lastReputation = currentReputation;
         int change = 0;
 
-        if (amount >= 5) //good ending
+        if (amount >= 6) //good ending
         {
             change = 15;
         }
-        else if (amount >= 3)
+        else if (amount > 3)
         {
             bool isPositive =Random.Range(0, 2) == 1;
             change = isPositive ? 5 : -5;
         }
         else //bad ending
         {
-            change = -10;
+            change = -15;
         }
 
         currentReputation += change;

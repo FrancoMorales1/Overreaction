@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: StartMiliQuest
   m_EditorClassIdentifier: Assembly-CSharp::DataDialogueScript
   npcImage: {fileID: 0}
-  npcName: Alan
+  npcName: Mili
   dialogueLines:
-  - IIIIIIIIIIIIIIIIIEEEEE, TeNNNNgo una PrregunnnnNta...
-  - dE QueE color es el caballo Blanco de San MarrrrrrrrTin *Golpea el pizarron*
-  - Estoy feliz y enojado porque maite no quiere ser mi amiga
+  - Mili = Hey!.. No te veia hace rato... la noche esta linda.. Podriamos salir juntos
+    luego...
+  - Player =  Esta coqueteando conmigo?... No soy bueno con las chichas... que debo
+    responderle???
+  - 'Player =  Respondo feliz? Extasiado?... la veo complicada... Creo que Buscare
+    los gestos faciales del tipo FELIZ... '
   nameNextScene: ThirdLevelScene
