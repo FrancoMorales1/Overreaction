@@ -9,7 +9,7 @@ public class InventoryItem
     public string itemName;
     public string category;
     public bool isCorrect;
-    
+    public int status = 3; // 3 = intacto, 2 = dañado, 1 = muy dañado, 0 = roto
     public Sprite itemIcon;
 
     public InventoryItem(string name, string cat, bool correct)
@@ -17,7 +17,7 @@ public class InventoryItem
         itemName = name;
         category = cat;
         isCorrect = correct;
-
+        status = 3;
         string path = "Items/" + cat;
 
         Sprite[] categorySprites = Resources.LoadAll<Sprite>(path);
