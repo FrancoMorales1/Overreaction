@@ -114,7 +114,7 @@ public class GMPlatformScript : MonoBehaviour
         {
             notificationPanel.SetActive(false);
         }
-        
+        ResetUI();
         notificationShown = false;
     }
     void ResetUI()
@@ -209,6 +209,8 @@ public class GMPlatformScript : MonoBehaviour
                 UpdateSlotUI(inventory[i].category, inventory[i].isCorrect);
                 
                 Debug.Log($"¡Item dañado! Ahora es incorrecto: {inventory[i].itemName}");
+
+                break;
             }
         }
 

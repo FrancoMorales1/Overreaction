@@ -6,7 +6,6 @@ public class InventorySlot : MonoBehaviour
     public string category;
     public Toggle checkToggle;
     public GameObject crossImage;
-    public GameObject damageImage;
 
     public void CleanSlot()
     {

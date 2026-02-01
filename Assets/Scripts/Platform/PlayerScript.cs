@@ -18,9 +18,12 @@ public class JohnMovement : MonoBehaviour
 
     public float invulnerabilityTime = 1.5f;
     private bool isInvulnerable = false;
+
+    private Animator Animator;
     void Start()
     {
-     Rigidbody2D = GetComponent<Rigidbody2D>();
+        Animator = GetComponent<Animator>();
+        Rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -30,18 +33,20 @@ public class JohnMovement : MonoBehaviour
             float left = Keyboard.current.leftArrowKey.isPressed || Keyboard.current.aKey.isPressed ? -1f : 0f;
             float right = Keyboard.current.rightArrowKey.isPressed || Keyboard.current.dKey.isPressed ? 1f : 0f;
             Horizontal = left + right;
+
+            Animator.SetBool("running", Horizontal != 0.0f);
         }
         if (Horizontal < 0.0f)
         {
-            transform.localScale = new Vector3(-4f, 4f, 4f);
+            transform.localScale = new Vector3(-0.3f, 0.3f, 0.3f);
         }
         else if (Horizontal > 0.0f)
         {
-            transform.localScale = new Vector3(4f, 4f, 4f);
+            transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
         }
 
-        Debug.DrawRay(transform.position, Vector2.down * 0.6f, Color.blue);      
-        if (Physics2D.Raycast(transform.position, Vector3.down, 0.6f))
+        Debug.DrawRay(transform.position, Vector2.down * 1f, Color.blue);      
+        if (Physics2D.Raycast(transform.position, Vector3.down, 1f))
         {
             Grounded = true;
         }
@@ -54,6 +59,8 @@ public class JohnMovement : MonoBehaviour
         {
             Jump();
         }
+        Animator.SetFloat("yVelocity", Rigidbody2D.linearVelocity.y);
+        Animator.SetBool("isGrounded", Grounded);
     }
 
     private void Jump()
