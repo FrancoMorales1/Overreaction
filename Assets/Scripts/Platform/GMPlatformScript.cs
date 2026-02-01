@@ -98,7 +98,7 @@ public class GMPlatformScript : MonoBehaviour
 
     void Start()
     {
-        // AudioManager.Instance.PlayGameMusic();
+        AudioManager.Instance.PlayGameMusic();
         Time.timeScale = 1f;
         ResetUI();
         notificationShown = false;
@@ -316,6 +316,10 @@ public class GMPlatformScript : MonoBehaviour
     private IEnumerator WaitAndLoadRoutine()
     {
         yield return new WaitForSecondsRealtime(1.5f);
+
+        Time.timeScale = 1f;
+        AudioManager.Instance.PlayMenuMusic();
+        
         Debug.Log("¡Nivel Completado!");
         // 1. Calculamos el puntaje
         int finalScore = CalculateFinalScore();
