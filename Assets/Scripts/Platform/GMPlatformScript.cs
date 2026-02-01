@@ -18,7 +18,7 @@ public class InventoryItem
         itemName = name;
         category = cat;
         isCorrect = correct;
-        string path = "Items/" + cat + "/"+ name;
+        string path = "Items/" + cat + "/" + name;
 
         Sprite[] categorySprites = Resources.LoadAll<Sprite>(path);
 
@@ -32,9 +32,8 @@ public class InventoryItem
             Debug.LogError($"No se encontraron imágenes en: Resources/{path}. Revisa que el nombre de la carpeta coincida con la categoría.");
         }
 
-        string spritePath = "ItemsSprite/" + cat + "/"+ name;
+        string spritePath = "ItemsSprite/" + cat + "/" + name;
         itemSprite = Resources.Load<Sprite>(spritePath);
-
     }
 
     public void CorruptItem()
@@ -43,7 +42,7 @@ public class InventoryItem
         isCorrect = false;
 
         string[] suffixes = { "A", "B", "C" };
-        
+
         List<string> incorrectOptions = new List<string>();
         foreach (string s in suffixes)
         {
@@ -64,7 +63,7 @@ public class InventoryItem
             itemIcon = categorySprites[Random.Range(0, categorySprites.Length)];
         }
 
-        string spritePath = "ItemsSprite/" + category + "/"+ itemName;
+        string spritePath = "ItemsSprite/" + category + "/" + itemName;
         itemSprite = Resources.Load<Sprite>(spritePath);
     }
 }
@@ -131,10 +130,11 @@ public class GMPlatformScript : MonoBehaviour
         ResetUI();
         notificationShown = false;
     }
+
     void ResetUI()
     {
         foreach (var slot in uiSlots) slot.CleanSlot();
-        foreach (var hSlot in haveSlots) hSlot.CleanSlot(); // Limpiamos la nueva lista
+        foreach (var hSlot in haveSlots) hSlot.CleanSlot();
     }
 
     void Update()
@@ -164,9 +164,9 @@ public class GMPlatformScript : MonoBehaviour
         }
     }
 
-    public void RegisterWorldItem(TargetScript item) 
+    public void RegisterWorldItem(TargetScript item)
     {
-        if(!allWorldItems.Contains(item)) allWorldItems.Add(item);
+        if (!allWorldItems.Contains(item)) allWorldItems.Add(item);
     }
 
     public bool AddItem(string name, string category)
@@ -199,9 +199,9 @@ public class GMPlatformScript : MonoBehaviour
         if (notificationPanel != null)
         {
             notificationPanel.SetActive(true);
-            
+
             yield return new WaitForSeconds(displayTime);
-            
+
             notificationPanel.SetActive(false);
         }
     }
@@ -217,9 +217,9 @@ public class GMPlatformScript : MonoBehaviour
                 atLeastOneWasCorrect = true;
 
                 inventory[i].CorruptItem();
-                
+
                 UpdateSlotUI(inventory[i].category, inventory[i].isCorrect, inventory[i].itemSprite);
-                
+
                 Debug.Log($"¡Item dañado! Ahora es incorrecto: {inventory[i].itemName}");
 
                 break;
@@ -269,7 +269,7 @@ public class GMPlatformScript : MonoBehaviour
             }
 
             Debug.Log("Sin objetos sanos. Volviendo al inicio sin impulso.");
-        }   
+        }
     }
 
     public void SetInFinishZone(bool value)
@@ -288,23 +288,18 @@ public class GMPlatformScript : MonoBehaviour
             }
 
             Debug.Log("Zona de meta alcanzada con todos los items. Finalizando automáticamente...");
-            CheckVictory(); 
+            CheckVictory();
         }
     }
 
-    // --- AQUÍ ESTÁ LA MAGIA ---
-    // Función auxiliar para saber cuántos puntos ganó el jugador
     int CalculateFinalScore()
     {
         int score = 0;
         foreach (var item in inventory)
         {
-            // Solo damos puntos si el objeto es el CORRECTO
             if (item.isCorrect)
             {
-                // Sumamos el 'status' (ej: si está intacto suma 3, si está roto suma 1 o 2)
-                // Esto permite que el diálogo cambie si el jugador llegó muy golpeado
-                score += 3; 
+                score += 3;
             }
         }
         return score;
@@ -312,7 +307,6 @@ public class GMPlatformScript : MonoBehaviour
 
     public void CheckVictory()
     {
-        // CONDICIÓN DE VICTORIA
         if (isInFinishZone && inventory.Count >= maxItems)
         {
             isGameOver = true;
@@ -338,59 +332,72 @@ public class GMPlatformScript : MonoBehaviour
         AudioManager.Instance.PlayMenuMusic();
 
         Debug.Log("¡Nivel Completado!");
-        // 1. Calculamos el puntaje
+        
         int finalScore = CalculateFinalScore();
 
-        // 2. Contactamos al Manager
         if (QuestFlowManager.Instance != null)
         {
-            // Le pasamos los datos
             QuestFlowManager.Instance.lastPointReached = finalScore;
-            QuestFlowManager.Instance.questCompleted = true; // Avisamos que volvemos con éxito
-            
+            QuestFlowManager.Instance.questCompleted = true;
+
             foreach (var item in inventory)
             {
                 if (item.category == "Cejas") QuestFlowManager.Instance.faceBrows = item.itemIcon;
                 else if (item.category == "Ojos") QuestFlowManager.Instance.faceEyes = item.itemIcon;
                 else if (item.category == "Boca") QuestFlowManager.Instance.faceMouth = item.itemIcon;
             }
-            Debug.Log("Guardando parte de la cara: " + QuestFlowManager.Instance.faceBrows);
-            Debug.Log("Guardando parte de la cara: " + QuestFlowManager.Instance.faceEyes);
-            Debug.Log("Guardando parte de la cara: " + QuestFlowManager.Instance.faceMouth);
+            
+            Debug.Log("Guardando partes de la cara...");
             QuestFlowManager.Instance.AdjustReputation(finalScore);
-            // 3. ¡SOLO CARGAMOS LA ESCENA!
-            // No llamamos a EndDialogueManager todavía. Eso lo hará el texto cuando termine de leerse.
-            UnityEngine.SceneManagement.SceneManager.LoadScene("QuestScene"); 
+
+            // --- CAMBIO: Usamos la transición inversa (Izquierda -> Derecha) ---
+            if (TransitionManager.Instance != null)
+            {
+                TransitionManager.Instance.LoadSceneWithTransitionReverse("QuestScene");
+            }
+            else
+            {
+                // Fallback por seguridad
+                UnityEngine.SceneManagement.SceneManager.LoadScene("QuestScene");
+            }
         }
         else
         {
-            // Fallback
             Debug.LogWarning("No se encontró QuestFlowManager...");
-            UnityEngine.SceneManagement.SceneManager.LoadScene("QuestScene");
+            
+            // Fallback con transición si es posible
+            if (TransitionManager.Instance != null)
+            {
+                TransitionManager.Instance.LoadSceneWithTransitionReverse("QuestScene");
+            }
+            else
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene("QuestScene");
+            }
         }
     }
+
     public void RestartButton()
     {
         Time.timeScale = 1f;
         Data.SetIsRestarting(true);
-        // Usamos la ruta completa para evitar el error de nombres que tenías antes
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
     public void PauseButton()
     {
         isPaused = !isPaused;
-        
+
         if (isPaused)
         {
-            Time.timeScale = 0f; // Congela el tiempo
-            if(pausePanel != null) pausePanel.SetActive(true); // Muestra el menú
+            Time.timeScale = 0f;
+            if (pausePanel != null) pausePanel.SetActive(true);
             Debug.Log("Juego Pausado");
         }
         else
         {
-            Time.timeScale = 1f; // Reanuda el tiempo
-            if(pausePanel != null) pausePanel.SetActive(false); // Oculta el menú
+            Time.timeScale = 1f;
+            if (pausePanel != null) pausePanel.SetActive(false);
             Debug.Log("Juego Reanudado");
         }
     }
@@ -399,7 +406,15 @@ public class GMPlatformScript : MonoBehaviour
     {
         Time.timeScale = 1f;
 
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenuScene");
+        // --- CAMBIO: Transición suave al menú principal ---
+        if (TransitionManager.Instance != null)
+        {
+            TransitionManager.Instance.LoadSceneWithTransition("MainMenuScene");
+        }
+        else
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenuScene");
+        }
     }
 
     void GameOver()
@@ -409,7 +424,7 @@ public class GMPlatformScript : MonoBehaviour
         if (isGameOver) return;
         isGameOver = true;
         Debug.Log("Se acabó el tiempo.");
-        
+
         foreach (string cat in expectedCategories)
         {
             bool hasCategory = false;
@@ -424,9 +439,9 @@ public class GMPlatformScript : MonoBehaviour
             if (!hasCategory)
             {
                 InventoryItem fakeItem = new InventoryItem(cat + "A", cat, false);
-                
-                fakeItem.CorruptItem(); 
-                
+
+                fakeItem.CorruptItem();
+
                 inventory.Add(fakeItem);
                 UpdateSlotUI(cat, false, fakeItem.itemSprite);
                 Debug.Log($"Generado item de relleno incorrecto para: {cat}");
