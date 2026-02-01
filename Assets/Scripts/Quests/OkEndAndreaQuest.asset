@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: OkEndAndreaQuest
   m_EditorClassIdentifier: Assembly-CSharp::DataDialogueScript
   npcImage: {fileID: 0}
-  npcName: Maite
+  npcName: Andrea
   dialogueLines:
-  - ...
-  - ..Te titila el ojo.. esta bien?...
+  - Player =  Ahh...
+  - Andrea = ... Ni te importa.. sos igual que todos..
   nameNextScene: QuestScene

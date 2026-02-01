@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GoodEndRaulQuest
   m_EditorClassIdentifier: Assembly-CSharp::DataDialogueScript
   npcImage: {fileID: 0}
-  npcName: Adolf
+  npcName: Raul
   dialogueLines:
-  - Me pone feliz de encontrar un camarada que me entienda!... Creo que volvere y
-    esta vez el frio no me va a ganar...
+  - Player =  ..No lo puedo creer... que mal educado..
+  - Raul = MAL APRENDIDO!!, Yo lo eduque bien!..
   nameNextScene: QuestScene

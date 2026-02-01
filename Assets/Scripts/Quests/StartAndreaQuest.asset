@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: StartAndreaQuest
   m_EditorClassIdentifier: Assembly-CSharp::DataDialogueScript
   npcImage: {fileID: 0}
-  npcName: Maite
+  npcName: Andrea
   dialogueLines:
-  - Hola, me llamo Maite..
-  - ... Flaqui estuvo rompiedome cosas en casa... Panchito ademas....
-  - .. y encima Alan me esta mirando raro hace media hora...
+  - Andrea = Estoy re mal.. vi a mi novio besando a otra.. Si ves a la del flequillo
+    mal recortado decile que es una rompehogares...
+  - Player = ... Pobre Andrea... deberia reaccionar con gestualidad TRISTEZA... o
+    la buitreo ?..
   nameNextScene: SecondLevelScene

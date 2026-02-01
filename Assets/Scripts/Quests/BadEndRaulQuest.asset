@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: BadEndRaulQuest
   m_EditorClassIdentifier: Assembly-CSharp::DataDialogueScript
   npcImage: {fileID: 0}
-  npcName: Adolf
+  npcName: Raul
   dialogueLines:
-  - Me parece que con esa actitud a vos te voy a hacer jabon...
+  - Player =  BUAAAAAAA
+  - Raul = ... Ya sos grande para llorar... COMPORTATE!..
   nameNextScene: QuestScene
