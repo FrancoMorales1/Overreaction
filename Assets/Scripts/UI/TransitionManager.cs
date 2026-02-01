@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System;
 
 public class TransitionManager : MonoBehaviour
 {
@@ -9,8 +10,14 @@ public class TransitionManager : MonoBehaviour
     [Header("UIReferences")]
     public RectTransform transitionPanel;
 
+    [Header("BlinkReferences")]
+    public RectTransform topEyelid;
+    public RectTransform bottomEyelid;
+
+
     [Header("Transition Settings")]
     public float transitionSpeed = 1.0f;
+    public float blinkSpeed = 0.3f;
 
     void Awake()
     {
@@ -25,6 +32,50 @@ public class TransitionManager : MonoBehaviour
         }
     }
 
+    public void Blink(Action accionWhileClosed)
+    {
+        StartCoroutine(BlinkRoutine(accionWhileClosed));
+    }
+
+    IEnumerator BlinkRoutine(Action accionWhileClosed)
+    {
+        float middleWindow = Screen.height / 2f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < blinkSpeed)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / blinkSpeed;
+            float currentY = Mathf.Lerp(0, middleWindow, t);
+
+            topEyelid.sizeDelta = new Vector2(topEyelid.sizeDelta.x, currentY);
+            bottomEyelid.sizeDelta = new Vector2(bottomEyelid.sizeDelta.x, currentY);
+            yield return null;  
+
+        }
+        topEyelid.sizeDelta = new Vector2(topEyelid.sizeDelta.x, middleWindow);
+        bottomEyelid.sizeDelta = new Vector2(bottomEyelid.sizeDelta.x, middleWindow);
+
+        if (accionWhileClosed != null)
+        {
+            accionWhileClosed.Invoke();
+        }
+        yield return new WaitForSeconds(0.2f);
+
+        elapsedTime = 0f;
+        while (elapsedTime < blinkSpeed)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / blinkSpeed;
+            float currentY = Mathf.Lerp(middleWindow, 0, t);
+
+            topEyelid.sizeDelta = new Vector2(topEyelid.sizeDelta.x, currentY);
+            bottomEyelid.sizeDelta = new Vector2(bottomEyelid.sizeDelta.x, currentY);
+            yield return null;  
+        }
+        topEyelid.sizeDelta = new Vector2(topEyelid.sizeDelta.x, 0);
+        bottomEyelid.sizeDelta = new Vector2(bottomEyelid.sizeDelta.x, 0);
+    }
     // --- ESTA ES LA FUNCIÓN PÚBLICA QUE LLAMAS DESDE OTROS SCRIPTS ---
     // Tipo 'void' para que sea fácil de llamar
     public void LoadSceneWithTransition(string sceneName)

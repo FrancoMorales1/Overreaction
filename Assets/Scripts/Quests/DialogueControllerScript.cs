@@ -61,4 +61,16 @@ public class DialogueControllerScript : MonoBehaviour
             QuestFlowManager.Instance.EndDialogueManager();
         }
     }
+
+    public void StartNewQuestFormManager()
+    {
+        if (dialogueLines != null) dialogueLines.Clear();
+
+        if (QuestFlowManager.Instance != null)
+        {
+            currentQuest = QuestFlowManager.Instance.GetDialogueForCurrentMission();
+        }
+
+        StartDialogue();
+    }
 }

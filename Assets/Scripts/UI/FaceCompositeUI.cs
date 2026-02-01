@@ -13,6 +13,11 @@ public class FaceCompositeUI : MonoBehaviour
 
     void Start()
     {
+        UpdateFaceUI();
+    }
+
+    public void UpdateFaceUI()
+    {
         if (QuestFlowManager.Instance == null) return;
 
         bool showFace = QuestFlowManager.Instance.questCompleted && QuestFlowManager.Instance.faceBrows != null;
