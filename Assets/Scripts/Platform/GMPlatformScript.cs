@@ -92,8 +92,13 @@ public class GMPlatformScript : MonoBehaviour
     private bool isPaused = false;
     private bool isInFinishZone = false;
 
+    [Header("Audio")]
+    public AudioClip deliverySound;
+    public float deliveryVolume = 1f;
+
     void Start()
     {
+        AudioManager.Instance.PlayGameMusic();
         Time.timeScale = 1f;
         ResetUI();
         notificationShown = false;
@@ -256,6 +261,15 @@ public class GMPlatformScript : MonoBehaviour
 
         if (isInFinishZone && inventory.Count >= maxItems)
         {
+            if (deliverySound != null)
+            {
+                Debug.Log("Reproduciendo sonido de entrega.");
+                Vector3 spawnPos = Camera.main.transform.position;
+                spawnPos.z = Camera.main.transform.position.z + 1f;
+
+                AudioSource.PlayClipAtPoint(deliverySound, spawnPos, deliveryVolume);
+            }
+
             Debug.Log("Zona de meta alcanzada con todos los items. Finalizando automáticamente...");
             CheckVictory(); 
         }
@@ -284,39 +298,10 @@ public class GMPlatformScript : MonoBehaviour
         // CONDICIÓN DE VICTORIA
         if (isInFinishZone && inventory.Count >= maxItems)
         {
-            Debug.Log("¡Nivel Completado!");
-            isGameOver = true; // Frenamos el juego
-
-            // 1. Calculamos el puntaje
-            int finalScore = CalculateFinalScore();
-
-            // 2. Contactamos al Manager
-            if (QuestFlowManager.Instance != null)
-            {
-                // Le pasamos los datos
-                QuestFlowManager.Instance.lastPointReached = finalScore;
-                QuestFlowManager.Instance.questCompleted = true; // Avisamos que volvemos con éxito
-                
-                foreach (var item in inventory)
-                {
-                    if (item.category == "Cejas") QuestFlowManager.Instance.faceBrows = item.itemIcon;
-                    else if (item.category == "Ojos") QuestFlowManager.Instance.faceEyes = item.itemIcon;
-                    else if (item.category == "Boca") QuestFlowManager.Instance.faceMouth = item.itemIcon;
-                }
-                Debug.Log("Guardando parte de la cara: " + QuestFlowManager.Instance.faceBrows);
-                Debug.Log("Guardando parte de la cara: " + QuestFlowManager.Instance.faceEyes);
-                Debug.Log("Guardando parte de la cara: " + QuestFlowManager.Instance.faceMouth);
-                QuestFlowManager.Instance.AdjustReputation(finalScore);
-                // 3. ¡SOLO CARGAMOS LA ESCENA!
-                // No llamamos a EndDialogueManager todavía. Eso lo hará el texto cuando termine de leerse.
-                UnityEngine.SceneManagement.SceneManager.LoadScene("QuestScene"); 
-            }
-            else
-            {
-                // Fallback
-                Debug.LogWarning("No se encontró QuestFlowManager...");
-                UnityEngine.SceneManagement.SceneManager.LoadScene("QuestScene");
-            }
+            isGameOver = true;
+            Time.timeScale = 0f;
+            Debug.Log("Victoria detectada. Congelando y esperando para cambiar de escena...");
+            StartCoroutine(WaitAndLoadRoutine());
         }
         else if (!isInFinishZone)
         {
@@ -328,6 +313,41 @@ public class GMPlatformScript : MonoBehaviour
         }
     }
 
+    private IEnumerator WaitAndLoadRoutine()
+    {
+        yield return new WaitForSecondsRealtime(1.5f);
+        Debug.Log("¡Nivel Completado!");
+        // 1. Calculamos el puntaje
+        int finalScore = CalculateFinalScore();
+
+        // 2. Contactamos al Manager
+        if (QuestFlowManager.Instance != null)
+        {
+            // Le pasamos los datos
+            QuestFlowManager.Instance.lastPointReached = finalScore;
+            QuestFlowManager.Instance.questCompleted = true; // Avisamos que volvemos con éxito
+            
+            foreach (var item in inventory)
+            {
+                if (item.category == "Cejas") QuestFlowManager.Instance.faceBrows = item.itemIcon;
+                else if (item.category == "Ojos") QuestFlowManager.Instance.faceEyes = item.itemIcon;
+                else if (item.category == "Boca") QuestFlowManager.Instance.faceMouth = item.itemIcon;
+            }
+            Debug.Log("Guardando parte de la cara: " + QuestFlowManager.Instance.faceBrows);
+            Debug.Log("Guardando parte de la cara: " + QuestFlowManager.Instance.faceEyes);
+            Debug.Log("Guardando parte de la cara: " + QuestFlowManager.Instance.faceMouth);
+            QuestFlowManager.Instance.AdjustReputation(finalScore);
+            // 3. ¡SOLO CARGAMOS LA ESCENA!
+            // No llamamos a EndDialogueManager todavía. Eso lo hará el texto cuando termine de leerse.
+            UnityEngine.SceneManagement.SceneManager.LoadScene("QuestScene"); 
+        }
+        else
+        {
+            // Fallback
+            Debug.LogWarning("No se encontró QuestFlowManager...");
+            UnityEngine.SceneManagement.SceneManager.LoadScene("QuestScene");
+        }
+    }
     public void RestartButton()
     {
         Time.timeScale = 1f;
@@ -363,21 +383,37 @@ public class GMPlatformScript : MonoBehaviour
 
     void GameOver()
     {
-        // Esto pasa si se acaba el tiempo (perder)
+        List<string> expectedCategories = new List<string> { "Cejas", "Ojos", "Boca" };
+
+        if (isGameOver) return;
         isGameOver = true;
         Debug.Log("Se acabó el tiempo.");
         
-        // AQUÍ DECIDES: 
-        // Opción A: Reiniciar el nivel automáticamente
-        RestartButton();
-
-        // Opción B: Volver al QuestScene diciendo que fallaste (0 puntos)
-        /*
-        if (QuestFlowManager.Instance != null) {
-             QuestFlowManager.Instance.lastPointReached = 0;
-             QuestFlowManager.Instance.questCompleted = true; 
-             QuestFlowManager.Instance.EndDialogueManager();
+        foreach (string cat in expectedCategories)
+        {
+            bool hasCategory = false;
+            foreach (var item in inventory)
+            {
+                if (item.category == cat)
+                {
+                    hasCategory = true;
+                    break;
+                }
+            }
+            if (!hasCategory)
+            {
+                InventoryItem fakeItem = new InventoryItem(cat + "A", cat, false);
+                
+                fakeItem.CorruptItem(); 
+                
+                inventory.Add(fakeItem);
+                UpdateSlotUI(cat, false);
+                Debug.Log($"Generado item de relleno incorrecto para: {cat}");
+            }
         }
-        */
+
+        isInFinishZone = true;
+
+        CheckVictory();
     }
 }

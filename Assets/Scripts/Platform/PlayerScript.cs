@@ -5,6 +5,10 @@ using UnityEngine.InputSystem;
 
 public class JohnMovement : MonoBehaviour
 {
+    [Header("Audio")]
+    public AudioClip hurtSound;
+    private AudioSource audioSource;
+
     private Rigidbody2D Rigidbody2D;
     private float Horizontal;
 
@@ -24,6 +28,7 @@ public class JohnMovement : MonoBehaviour
     {
         Animator = GetComponent<Animator>();
         Rigidbody2D = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -77,6 +82,11 @@ public class JohnMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy") && !isInvulnerable)
         {
+            if (audioSource != null && hurtSound != null)
+            {
+                audioSource.PlayOneShot(hurtSound);
+            }
+
             // 1. Calculamos si el enemigo está a la izquierda o derecha
             // Si la resta da positivo, el enemigo está a la izquierda (saltamos a la derecha)
             // Si da negativo, el enemigo está a la derecha (saltamos a la izquierda)

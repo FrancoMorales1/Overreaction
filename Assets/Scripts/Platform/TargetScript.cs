@@ -9,6 +9,10 @@ public class TargetScript : MonoBehaviour
     public string itemName;
     public string itemCategory;
 
+    [Header("Audio")]
+    public AudioClip pickupSound;
+    [Range(0f, 10f)] public float volume = 10f;
+
     private void Start()
     {
         if (gameManager != null) gameManager.RegisterWorldItem(this);
@@ -22,6 +26,14 @@ public class TargetScript : MonoBehaviour
             {
                 if(gameManager.AddItem(itemName, itemCategory)) 
                 {
+                    if (pickupSound != null)
+                    {
+                        Vector3 spawnPos = Camera.main.transform.position;
+                        spawnPos.z = Camera.main.transform.position.z + 1f;
+
+                        AudioSource.PlayClipAtPoint(pickupSound, spawnPos, volume);
+                    }
+
                     gameObject.SetActive(false);
                 }
             }

@@ -144,3 +144,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TargetScript
   gameManager: {fileID: 0}
   itemName: 
+  itemCategory: 
+  pickupSound: {fileID: 8300000, guid: e5d6fae6685dd22448e0b45b6aeac18a, type: 3}
+  volume: 1

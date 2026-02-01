@@ -3467,6 +3467,8 @@ MonoBehaviour:
   - BocaC
   - OjosC
   - CejasC
+  deliverySound: {fileID: 8300000, guid: d16623f4f61d58e4f89b405e698e106b, type: 3}
+  deliveryVolume: 10
 --- !u!1001 &774614246
 PrefabInstance:
   m_ObjectHideFlags: 0
