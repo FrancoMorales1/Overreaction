@@ -19,6 +19,8 @@ public class FaceCompositeUI : MonoBehaviour
 
         if(showFace)
         {
+            fullpanel.SetActive(true);
+
             imgBrows.sprite = QuestFlowManager.Instance.faceBrows;
             imgEyes.sprite = QuestFlowManager.Instance.faceEyes;
             imgMouth.sprite = QuestFlowManager.Instance.faceMouth;

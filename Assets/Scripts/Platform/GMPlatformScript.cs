@@ -313,7 +313,9 @@ public class GMPlatformScript : MonoBehaviour
                     else if (item.category == "Ojos") QuestFlowManager.Instance.faceEyes = item.itemIcon;
                     else if (item.category == "Boca") QuestFlowManager.Instance.faceMouth = item.itemIcon;
                 }
-
+                Debug.Log("Guardando parte de la cara: " + QuestFlowManager.Instance.faceBrows);
+                Debug.Log("Guardando parte de la cara: " + QuestFlowManager.Instance.faceEyes);
+                Debug.Log("Guardando parte de la cara: " + QuestFlowManager.Instance.faceMouth);
                 QuestFlowManager.Instance.AdjustReputation(finalScore);
                 // 3. ¡SOLO CARGAMOS LA ESCENA!
                 // No llamamos a EndDialogueManager todavía. Eso lo hará el texto cuando termine de leerse.
