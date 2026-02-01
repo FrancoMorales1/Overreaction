@@ -12,31 +12,19 @@ public class InventorySlot : MonoBehaviour
     {
         checkToggle.isOn = false;
         crossImage.SetActive(false);
-        damageImage.SetActive(false);
     }
 
-    public void SetStatus(bool isCorrect, bool isDamaged)
+    public void SetStatus(bool isCorrect)
     {
         if (isCorrect)
         {
-            if (isDamaged)
-            {
-                checkToggle.isOn = false;
-                crossImage.SetActive(false);
-                damageImage.SetActive(true);
-            }
-            else
-            {
-                checkToggle.isOn = true;
-                crossImage.SetActive(false);
-                damageImage.SetActive(false);
-            }
+            checkToggle.isOn = true;
+            crossImage.SetActive(false);
         }
         else
         {
             checkToggle.isOn = false;
             crossImage.SetActive(true);
-            damageImage.SetActive(false);
         }
     }
 

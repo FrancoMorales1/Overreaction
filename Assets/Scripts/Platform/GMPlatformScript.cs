@@ -10,7 +10,6 @@ public class InventoryItem
     public string itemName;
     public string category;
     public bool isCorrect;
-    public int status = 3;
     public Sprite itemIcon;
 
     public InventoryItem(string name, string cat, bool correct)
@@ -18,7 +17,6 @@ public class InventoryItem
         itemName = name;
         category = cat;
         isCorrect = correct;
-        status = 3;
         string path = "Items/" + cat + "/"+ name;
 
         Sprite[] categorySprites = Resources.LoadAll<Sprite>(path);
@@ -31,6 +29,34 @@ public class InventoryItem
         else
         {
             Debug.LogError($"No se encontraron imágenes en: Resources/{path}. Revisa que el nombre de la carpeta coincida con la categoría.");
+        }
+    }
+
+    public void CorruptItem()
+    {
+        string nameToAvoid = itemName;
+        isCorrect = false;
+
+        string[] suffixes = { "A", "B", "C" };
+        
+        List<string> incorrectOptions = new List<string>();
+        foreach (string s in suffixes)
+        {
+            string potentialName = category + s;
+            if (potentialName != nameToAvoid)
+            {
+                incorrectOptions.Add(potentialName);
+            }
+        }
+
+        itemName = incorrectOptions[Random.Range(0, incorrectOptions.Count)];
+
+        string path = "Items/" + category + "/" + itemName;
+        Sprite[] categorySprites = Resources.LoadAll<Sprite>(path);
+
+        if (categorySprites.Length > 0)
+        {
+            itemIcon = categorySprites[Random.Range(0, categorySprites.Length)];
         }
     }
 }
@@ -84,13 +110,11 @@ public class GMPlatformScript : MonoBehaviour
 
     void Awake()
     {
-        // Forzamos que el panel esté apagado antes de cualquier otra cosa
         if (notificationPanel != null)
         {
             notificationPanel.SetActive(false);
         }
         
-        // También reseteamos la variable por seguridad
         notificationShown = false;
     }
     void ResetUI()
@@ -146,7 +170,7 @@ public class GMPlatformScript : MonoBehaviour
             InventoryItem newItem = new InventoryItem(name, category, correct);
             inventory.Add(newItem);
 
-            UpdateSlotUI(category, correct, false);
+            UpdateSlotUI(category, correct);
 
             if (inventory.Count >= maxItems && !notificationShown)
             {
@@ -164,63 +188,27 @@ public class GMPlatformScript : MonoBehaviour
         {
             notificationPanel.SetActive(true);
             
-            // Espera unos segundos (displayTime)
             yield return new WaitForSeconds(displayTime);
             
             notificationPanel.SetActive(false);
         }
     }
+
     public void PlayerHit(Vector2 hitDirection)
     {
-        List<InventoryItem> itemsToRemove = new List<InventoryItem>();
         bool atLeastOneWasCorrect = false;
 
-        foreach (var item in inventory)
+        for (int i = 0; i < inventory.Count; i++)
         {
-            if (item.isCorrect && item.status > 0)
+            if (inventory[i].isCorrect)
             {
                 atLeastOneWasCorrect = true;
-                item.status -= 1;
-                if (item.status <= 0)
-                {
-                    itemsToRemove.Add(item);
-                } else
-                {
-                    UpdateSlotUI(item.category, item.isCorrect, true);
-                }
-                Debug.Log("¡Se rompió!: " + item.category);
-                // Opcional: Si el status llega a 0, ¿deja de contar como punto?
-            }
-        }
 
-        // 3. Procesamos los objetos que deben ser eliminados y reaparecer
-        if (itemsToRemove.Count > 0)
-        {
-            notificationShown = false;
-            foreach (var itemDead in itemsToRemove)
-            {
-                string cat = itemDead.category;
-                string name = itemDead.itemName;
-
-                // Quitar del inventario lógico
-                inventory.Remove(itemDead);
-
-                // Limpiar su slot en la UI
-                foreach (var slot in uiSlots)
-                {
-                    if (slot.category == cat) { slot.CleanSlot(); break; }
-                }
-
-                // Reaparecer el objeto en el mapa
-                foreach (var worldItem in allWorldItems)
-                {
-                    if (worldItem.itemName == name && worldItem.itemCategory == cat)
-                    {
-                        worldItem.gameObject.SetActive(true);
-                        Debug.Log($"Reapareciendo {name} en el mundo.");
-                        break;
-                    }
-                }
+                inventory[i].CorruptItem();
+                
+                UpdateSlotUI(inventory[i].category, inventory[i].isCorrect);
+                
+                Debug.Log($"¡Item dañado! Ahora es incorrecto: {inventory[i].itemName}");
             }
         }
 
@@ -230,13 +218,13 @@ public class GMPlatformScript : MonoBehaviour
         }
     }
 
-    private void UpdateSlotUI(string category, bool isCorrect, bool isDamaged)
+    private void UpdateSlotUI(string category, bool isCorrect)
     {
         foreach (var slot in uiSlots)
         {
             if (slot.category == category)
             {
-                slot.SetStatus(isCorrect, isDamaged);
+                slot.SetStatus(isCorrect);
                 break;
             }
         }
