@@ -98,7 +98,7 @@ public class GMPlatformScript : MonoBehaviour
 
     void Start()
     {
-        AudioManager.Instance.PlayGameMusic();
+        // AudioManager.Instance.PlayGameMusic();
         Time.timeScale = 1f;
         ResetUI();
         notificationShown = false;
