@@ -134,4 +134,49 @@ public class TransitionManager : MonoBehaviour
 
         transitionPanel.anchoredPosition = new Vector2(endX, 0);
     }
+
+    public void LoadSceneWithBlink(string sceneName)
+    {
+        StartCoroutine(BlinkLoadRoutine(sceneName));
+    }
+
+    IEnumerator BlinkLoadRoutine(string sceneName)
+    {
+        float middleWindow = Screen.height / 2f;
+        float elapsedTime = 0f;
+
+        // 1. CERRAR OJOS
+        while (elapsedTime < blinkSpeed)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / blinkSpeed;
+            float currentY = Mathf.Lerp(0, middleWindow, t);
+
+            topEyelid.sizeDelta = new Vector2(topEyelid.sizeDelta.x, currentY);
+            bottomEyelid.sizeDelta = new Vector2(bottomEyelid.sizeDelta.x, currentY);
+            yield return null;
+        }
+        topEyelid.sizeDelta = new Vector2(topEyelid.sizeDelta.x, middleWindow);
+        bottomEyelid.sizeDelta = new Vector2(bottomEyelid.sizeDelta.x, middleWindow);
+
+        SceneManager.LoadScene(sceneName);
+
+        // Esperamos un frame para que Unity termine de cargar y despertar los objetos de la nueva escena
+        yield return null; 
+
+        // 3. ABRIR OJOS
+        elapsedTime = 0f;
+        while (elapsedTime < blinkSpeed)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / blinkSpeed;
+            float currentY = Mathf.Lerp(middleWindow, 0, t);
+
+            topEyelid.sizeDelta = new Vector2(topEyelid.sizeDelta.x, currentY);
+            bottomEyelid.sizeDelta = new Vector2(bottomEyelid.sizeDelta.x, currentY);
+            yield return null;
+        }
+        topEyelid.sizeDelta = new Vector2(topEyelid.sizeDelta.x, 0);
+        bottomEyelid.sizeDelta = new Vector2(bottomEyelid.sizeDelta.x, 0);
+    }
 }

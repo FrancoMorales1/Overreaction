@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429a7e6a573baaf408bdb26bf4fa63cf, type: 3}
   m_Name: OkEndMiliQuest
   m_EditorClassIdentifier: Assembly-CSharp::DataDialogueScript
-  npcImage: {fileID: 0}
+  npcImage: {fileID: -2133758725092164050, guid: 68d2925c86045a2428933734c7ca2155, type: 3}
   npcName: Mili
   dialogueLines:
   - Player = JA JA JA

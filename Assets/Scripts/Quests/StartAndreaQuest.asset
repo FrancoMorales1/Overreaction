@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429a7e6a573baaf408bdb26bf4fa63cf, type: 3}
   m_Name: StartAndreaQuest
   m_EditorClassIdentifier: Assembly-CSharp::DataDialogueScript
-  npcImage: {fileID: 0}
+  npcImage: {fileID: 1272061111619406746, guid: 1f89b61b525b6754f827578be03fb779, type: 3}
   npcName: Andrea
   dialogueLines:
   - Andrea = Estoy re mal.. vi a mi novio besando a otra.. Si ves a la del flequillo

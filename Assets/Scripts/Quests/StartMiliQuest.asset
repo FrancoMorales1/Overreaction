@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429a7e6a573baaf408bdb26bf4fa63cf, type: 3}
   m_Name: StartMiliQuest
   m_EditorClassIdentifier: Assembly-CSharp::DataDialogueScript
-  npcImage: {fileID: 0}
+  npcImage: {fileID: 8137691608970320035, guid: ba38568d93a9ced4b8c6777b24bd74f0, type: 3}
   npcName: Mili
   dialogueLines:
   - Mili = Hey!.. No te veia hace rato... la noche esta linda.. Podriamos salir juntos
