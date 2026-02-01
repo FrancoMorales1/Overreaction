@@ -9,14 +9,28 @@ public class InventoryItem
     public string itemName;
     public string category;
     public bool isCorrect;
-    public int status; // 3 = Intacto, <3 = Dañado
+    
+    public Sprite itemIcon;
 
     public InventoryItem(string name, string cat, bool correct)
     {
         itemName = name;
         category = cat;
         isCorrect = correct;
-        status = 3;
+
+        string path = "Items/" + cat;
+
+        Sprite[] categorySprites = Resources.LoadAll<Sprite>(path);
+
+        if (categorySprites.Length > 0)
+        {
+            int randomIndex = Random.Range(0, categorySprites.Length);
+            itemIcon = categorySprites[randomIndex];
+        }
+        else
+        {
+            Debug.LogError($"No se encontraron imágenes en: Resources/{path}. Revisa que el nombre de la carpeta coincida con la categoría.");
+        }
     }
 }
 
@@ -257,10 +271,7 @@ public class GMPlatformScript : MonoBehaviour
             {
                 // Sumamos el 'status' (ej: si está intacto suma 3, si está roto suma 1 o 2)
                 // Esto permite que el diálogo cambie si el jugador llegó muy golpeado
-                if (item.status > 0) 
-                {
-                    score += item.status; 
-                }
+                score += 3; 
             }
         }
         return score;

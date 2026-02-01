@@ -3377,6 +3377,7 @@ MonoBehaviour:
   notificationPanel: {fileID: 1616885116}
   displayTime: 3
   inventory: []
+  pausePanel: {fileID: 0}
   maxItems: 3
   correctItemNames:
   - BocaA
@@ -5170,7 +5171,7 @@ GameObject:
   - component: {fileID: 1558890856}
   - component: {fileID: 1558890857}
   m_Layer: 5
-  m_Name: Item_Slot_1
+  m_Name: Cejas_slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5601,7 +5602,7 @@ GameObject:
   - component: {fileID: 1700548385}
   - component: {fileID: 1700548386}
   m_Layer: 5
-  m_Name: Item_Slot_2
+  m_Name: Ojos_slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6377,7 +6378,7 @@ GameObject:
   - component: {fileID: 1968047260}
   - component: {fileID: 1968047261}
   m_Layer: 5
-  m_Name: Item_Slot_3
+  m_Name: Boca_slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
