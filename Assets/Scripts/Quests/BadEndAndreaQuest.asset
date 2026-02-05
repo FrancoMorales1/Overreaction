@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: BadEndAndreaQuest
   m_EditorClassIdentifier: Assembly-CSharp::DataDialogueScript
   npcImage: {fileID: -3071858011722858061, guid: 45dd63982a4a0c34494c4b0099892483, type: 3}
-  npcName: Andrea
-  dialogueLines:
-  - Player =   BESO TRIPLE!
-  - Andrea =  Ubicate un poco...
-  nameNextScene: QuestScene
+  npcColor: {r: 0.1764706, g: 0.5137255, b: 0.7764706, a: 1}
+  playerColor: {r: 0.6392157, g: 0.08235294, b: 0.48235294, a: 1}
+  conversation:
+  - text: Player = BESO TRIPLE!
+    isPlayer: 1
+  - text: Andrea = Que irrespetuoso que SOS!
+    isPlayer: 0

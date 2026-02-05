@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: GoodEndMiliQuest
   m_EditorClassIdentifier: Assembly-CSharp::DataDialogueScript
   npcImage: {fileID: 8137691608970320035, guid: ba38568d93a9ced4b8c6777b24bd74f0, type: 3}
-  npcName: Mili
-  dialogueLines:
-  - Player =  Por Supuesto! Me encantaria pasear..
-  - Mili = ..Nos vemos en un rato ;)...
-  nameNextScene: QuestScene
+  npcColor: {r: 0.827451, g: 0.5803922, b: 0.08235294, a: 1}
+  playerColor: {r: 0.6392157, g: 0.08235294, b: 0.48235294, a: 1}
+  conversation:
+  - text: Player =  Por Supuesto! Me encantaria pasear..
+    isPlayer: 1
+  - text: Mili = ..Nos vemos en un rato ;)...
+    isPlayer: 0

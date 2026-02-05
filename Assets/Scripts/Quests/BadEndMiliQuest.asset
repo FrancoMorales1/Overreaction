@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: BadEndMiliQuest
   m_EditorClassIdentifier: Assembly-CSharp::DataDialogueScript
   npcImage: {fileID: -2133758725092164050, guid: 68d2925c86045a2428933734c7ca2155, type: 3}
-  npcName: Mili
-  dialogueLines:
-  - Player = A mi ex tambien le gustaba la noche...
-  - Mili = ... Okey?
-  nameNextScene: QuestScene
+  npcColor: {r: 0.82641506, g: 0.5774023, b: 0.079522945, a: 1}
+  playerColor: {r: 0.6392157, g: 0.08235294, b: 0.48235294, a: 1}
+  conversation:
+  - text: Player = A mi ex tambien le gustaba la noche...
+    isPlayer: 1
+  - text: Mili = ... Okey?
+    isPlayer: 0

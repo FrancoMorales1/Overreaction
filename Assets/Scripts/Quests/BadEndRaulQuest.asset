@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: BadEndRaulQuest
   m_EditorClassIdentifier: Assembly-CSharp::DataDialogueScript
   npcImage: {fileID: -2768480586606461467, guid: 378430950fe0bf3449dea2460e7b4de7, type: 3}
-  npcName: Raul
-  dialogueLines:
-  - Player =  BUAAAAAAA
-  - Raul = ... Ya sos grande para llorar... COMPORTATE!..
-  nameNextScene: QuestScene
+  npcColor: {r: 0.5411765, g: 0.11372549, b: 0.14509805, a: 1}
+  playerColor: {r: 0.6392157, g: 0.08235294, b: 0.48235294, a: 1}
+  conversation:
+  - text: Player =  BUAAAAAAA
+    isPlayer: 1
+  - text: Raul = ... Ya sos grande para llorar... COMPORTATE!..
+    isPlayer: 0

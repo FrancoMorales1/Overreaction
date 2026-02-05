@@ -11,16 +11,19 @@ public class DialogueControllerScript : MonoBehaviour
 
     public DataDialogueScript currentQuest;
 
-    private Queue<string> dialogueLines;
+    private Queue<DataDialogueScript.DialogueEntry> dialogueQueue;
 
     void Start()
     {
+        dialogueQueue = new Queue<DataDialogueScript.DialogueEntry>();
         if (QuestFlowManager.Instance != null)
         {
             currentQuest = QuestFlowManager.Instance.GetDialogueForCurrentMission();
         }
-        dialogueLines = new Queue<string>();
-        StartDialogue();
+        if (currentQuest != null)
+        {
+            StartDialogue();
+        }
     }
 
     public void StartDialogue()
@@ -31,11 +34,11 @@ public class DialogueControllerScript : MonoBehaviour
             npcImageUI.preserveAspect = true;
         }
 
-        dialogueLines.Clear();
+        dialogueQueue.Clear();
 
-        foreach (string line in currentQuest.dialogueLines)
+        foreach (var entry in currentQuest.conversation)
         {
-            dialogueLines.Enqueue(line);
+            dialogueQueue.Enqueue(entry);
         }
 
         ShowNextLine();
@@ -43,19 +46,40 @@ public class DialogueControllerScript : MonoBehaviour
 
     public void ShowNextLine()
     {
-        if (dialogueLines.Count == 0)
+        if (dialogueQueue.Count == 0)
         {
             EndDialogue();
             return;
         }
 
-        string line = dialogueLines.Dequeue();
-        windowText.text = line;
+        // Sacamos la siguiente entrada
+        DataDialogueScript.DialogueEntry currentEntry = dialogueQueue.Dequeue();
+
+        // 1. Ponemos el texto
+        windowText.text = currentEntry.text;
+
+        // 2. Decidimos el color según quién habla
+        if (currentEntry.isPlayer)
+        {
+            // Es el jugador
+            windowText.color = currentQuest.playerColor;
+            
+            // Opcional: Podrías oscurecer la imagen del NPC si habla el jugador
+            // if(npcImageUI != null) npcImageUI.color = Color.gray;
+        }
+        else
+        {
+            // Es el NPC
+            windowText.color = currentQuest.npcColor;
+            
+            // Opcional: Restaurar color normal
+            // if(npcImageUI != null) npcImageUI.color = Color.white;
+        }
     }
 
     void EndDialogue()
     {
-       Debug.Log("Dialogue ended.");
+        Debug.Log("Dialogue ended.");
         if (QuestFlowManager.Instance != null)
         {
             QuestFlowManager.Instance.EndDialogueManager();
@@ -64,8 +88,7 @@ public class DialogueControllerScript : MonoBehaviour
 
     public void StartNewQuestFormManager()
     {
-        if (dialogueLines != null) dialogueLines.Clear();
-
+        if (dialogueQueue != null) dialogueQueue.Clear();
         if (QuestFlowManager.Instance != null)
         {
             currentQuest = QuestFlowManager.Instance.GetDialogueForCurrentMission();

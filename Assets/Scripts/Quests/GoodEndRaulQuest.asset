@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: GoodEndRaulQuest
   m_EditorClassIdentifier: Assembly-CSharp::DataDialogueScript
   npcImage: {fileID: -2097329635908921250, guid: 9a650ed61efaa914c85f504c4f410842, type: 3}
-  npcName: Raul
-  dialogueLines:
-  - Player =  ..No lo puedo creer... que mal educado..
-  - Raul = MAL APRENDIDO!!, Yo lo eduque bien!..
-  nameNextScene: QuestScene
+  npcColor: {r: 0.5411765, g: 0.11372549, b: 0.14509805, a: 1}
+  playerColor: {r: 0.6392157, g: 0.08235294, b: 0.48235294, a: 1}
+  conversation:
+  - text: Player =  ..No lo puedo creer... que mal educado..
+    isPlayer: 1
+  - text: Raul = MAL APRENDIDO!!, Yo lo eduque bien!..
+    isPlayer: 0

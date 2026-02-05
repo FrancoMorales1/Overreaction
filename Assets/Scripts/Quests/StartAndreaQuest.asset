@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: StartAndreaQuest
   m_EditorClassIdentifier: Assembly-CSharp::DataDialogueScript
   npcImage: {fileID: 1272061111619406746, guid: 1f89b61b525b6754f827578be03fb779, type: 3}
-  npcName: Andrea
-  dialogueLines:
-  - Andrea = Estoy re mal.. vi a mi novio besando a otra.. Si ves a la del flequillo
-    mal recortado decile que es una rompehogares...
-  - Player = ... Pobre Andrea... deberia reaccionar con gestualidad TRISTEZA... o
-    la buitreo ?..
-  nameNextScene: SecondLevelScene
+  npcColor: {r: 0.17369162, g: 0.51305985, b: 0.7735849, a: 1}
+  playerColor: {r: 0.6392157, g: 0.08235294, b: 0.48235294, a: 1}
+  conversation:
+  - text: Andrea = Estoy re mal.. vi a mi novio besando a otra.. Si ves a la del
+      flequillo mal recortado decile que es una rompehogares...
+    isPlayer: 0
+  - text: Player = ... Pobre Andrea... deberia reaccionar con gestualidad TRISTEZA...
+      o  la buitreo ?..
+    isPlayer: 1

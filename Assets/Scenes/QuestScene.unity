@@ -693,6 +693,7 @@ GameObject:
   - component: {fileID: 536481347}
   - component: {fileID: 536481346}
   - component: {fileID: 536481345}
+  - component: {fileID: 536481348}
   m_Layer: 5
   m_Name: NpcPortrait
   m_TagString: Untagged
@@ -757,6 +758,25 @@ RectTransform:
   m_AnchoredPosition: {x: 338, y: 420.65}
   m_SizeDelta: {x: -883.089, y: 722.3052}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &536481348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536481344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5515724b19260c441905da0620778389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIIdleEffect
+  enablePosition: 1
+  moveSpeed: 1.5
+  moveAmountX: 2
+  moveAmountY: 5
+  enableBreathing: 1
+  breathSpeed: 0.8
+  breathAmount: 0.01
 --- !u!1 &697505311
 GameObject:
   m_ObjectHideFlags: 0

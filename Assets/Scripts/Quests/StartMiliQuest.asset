@@ -13,12 +13,15 @@ MonoBehaviour:
   m_Name: StartMiliQuest
   m_EditorClassIdentifier: Assembly-CSharp::DataDialogueScript
   npcImage: {fileID: 8137691608970320035, guid: ba38568d93a9ced4b8c6777b24bd74f0, type: 3}
-  npcName: Mili
-  dialogueLines:
-  - Mili = Hey!.. No te veia hace rato... la noche esta linda.. Podriamos salir juntos
-    luego...
-  - Player =  Esta coqueteando conmigo?... No soy bueno con las chichas... que debo
-    responderle???
-  - 'Player =  Respondo feliz? Extasiado?... la veo complicada... Creo que Buscare
-    los gestos faciales del tipo FELIZ... '
-  nameNextScene: ThirdLevelScene
+  npcColor: {r: 0.827451, g: 0.5803922, b: 0.08235294, a: 1}
+  playerColor: {r: 0.6392157, g: 0.08235294, b: 0.48235294, a: 1}
+  conversation:
+  - text: Mili = Hey!.. No te veia hace rato... la noche esta linda.. Podriamos salir
+      juntos luego...
+    isPlayer: 0
+  - text: Player =  Esta coqueteando conmigo?... No soy bueno con las Chikistrikis...
+      que debo responderle???
+    isPlayer: 1
+  - text: Player = Respondo feliz? Extasiado?... la veo complicada... Creo que buscare
+      los gestos faciales del tipo FELIZ...
+    isPlayer: 1
