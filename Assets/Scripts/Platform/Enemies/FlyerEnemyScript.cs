@@ -6,13 +6,24 @@ public class FlyerEnemyScript : MonoBehaviour
     public float speed = 3f;
     private int direction = 1;
 
-    void Update()
+    private Rigidbody2D rb;
+
+    void Start()
     {
-        transform.Translate(Vector3.up * direction * speed * Time.deltaTime);
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    void FixedUpdate()
+    {
+        Vector2 nuevaPos = rb.position + Vector2.up * direction * speed * Time.fixedDeltaTime;
+        rb.MovePosition(nuevaPos);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        direction *= -1;
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            direction = -direction;
+        }
     }
 }

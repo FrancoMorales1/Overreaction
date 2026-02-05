@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour
         if (Data != null && timerText != null)
         {
             // "F0" sirve para que no muestre decimales (ej: 59 en vez de 59.324)
-            timerText.text = "Tiempo: " + Data.timeLeft.ToString("F0");
+            timerText.text = Data.timeLeft.ToString("F0");
 
             // Opcional: Si queda poco tiempo, ponerlo en rojo
             if (Data.timeLeft < 10f)
