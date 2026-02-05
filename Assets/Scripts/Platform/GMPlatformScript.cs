@@ -419,37 +419,57 @@ public class GMPlatformScript : MonoBehaviour
 
     void GameOver()
     {
-        List<string> expectedCategories = new List<string> { "Cejas", "Ojos", "Boca" };
-
         if (isGameOver) return;
         isGameOver = true;
-        Debug.Log("Se acabó el tiempo.");
+        Debug.Log("Se acabó el tiempo. Generando fallos aleatorios...");
+
+        string[] expectedCategories = { "Cejas", "Ojos", "Boca" };
+        string[] suffixes = { "A", "B", "C" }; 
 
         foreach (string cat in expectedCategories)
         {
-            bool hasCategory = false;
-            foreach (var item in inventory)
-            {
-                if (item.category == cat)
-                {
-                    hasCategory = true;
-                    break;
-                }
-            }
+            // 1. Verificamos si el jugador ya tiene algo de esta categoría
+            bool hasCategory = inventory.Exists(item => item.category == cat);
+
             if (!hasCategory)
             {
-                InventoryItem fakeItem = new InventoryItem(cat + "A", cat, false);
+                // 2. Creamos una lista de candidatos que sabemos que son INCORRECTOS
+                List<string> wrongOptions = new List<string>();
+                
+                foreach (string s in suffixes)
+                {
+                    string potentialName = cat + s;
+                    // Solo lo agregamos si NO está en la lista de aciertos
+                    if (!correctItemNames.Contains(potentialName))
+                    {
+                        wrongOptions.Add(potentialName);
+                    }
+                }
 
-                fakeItem.CorruptItem();
+                // 3. Elegimos uno al azar de la lista de incorrectos
+                string chosenWrongName;
+                if (wrongOptions.Count > 0)
+                {
+                    chosenWrongName = wrongOptions[Random.Range(0, wrongOptions.Count)];
+                }
+                else
+                {
+                    // Fallback extremo si configuraste mal los nombres en el inspector
+                    chosenWrongName = cat + "X"; 
+                }
 
+                // 4. Creamos el ítem y lo metemos al inventario
+                InventoryItem fakeItem = new InventoryItem(chosenWrongName, cat, false);
                 inventory.Add(fakeItem);
+                
+                // 5. Actualizamos la UI para que se vea el "regalito"
                 UpdateSlotUI(cat, false, fakeItem.itemSprite);
-                Debug.Log($"Generado item de relleno incorrecto para: {cat}");
+                
+                Debug.Log($"[GameOver] Faltaba {cat}. Se asignó aleatoriamente: {chosenWrongName}");
             }
         }
 
         isInFinishZone = true;
-
         CheckVictory();
     }
 }

@@ -17,11 +17,12 @@ public class JohnMovement : MonoBehaviour
     public float JumpForce = 5f;
     public float Speed = 2f;
     [Header("Efecto de Daño")]
-    public float knockbackForce = 10f;
+    public float knockbackForce = 3f;
     public GMPlatformScript gameManager;
 
     public float invulnerabilityTime = 1.5f;
     private bool isInvulnerable = false;
+    private bool isKnockedBack = false;
 
     private Animator Animator;
     void Start()
@@ -75,7 +76,10 @@ public class JohnMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Rigidbody2D.linearVelocity = new Vector2(Horizontal * Speed, Rigidbody2D.linearVelocity.y);
+        if (!isKnockedBack) 
+        {
+            Rigidbody2D.linearVelocity = new Vector2(Horizontal * Speed, Rigidbody2D.linearVelocity.y);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -104,9 +108,13 @@ public class JohnMovement : MonoBehaviour
             // 4. Avisamos al GameManager (enviando el vector por si lo necesitas)
             gameManager.PlayerHit(knockbackDir);
 
+            isKnockedBack = true;
+            Invoke("StopKnockback", 0.2f);
             StartCoroutine(BecomeInvulnerable());
         }
     }
+
+    private void StopKnockback() { isKnockedBack = false; }
 
     private IEnumerator BecomeInvulnerable()
     {
