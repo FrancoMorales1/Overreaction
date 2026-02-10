@@ -48,15 +48,22 @@ public class TransitionManager : MonoBehaviour
 
     private IEnumerator HorizontalTransitionLoop(string sceneName, bool isReverse)
     {
-        float width = Screen.width;
-        float startX = isReverse ? -width : width;
-        float exitX = isReverse ? width : -width;
+        // Obtenemos el ancho escalado del Canvas a través del padre del panel
+        // Si el panel es hijo directo del Canvas, esto nos da el ancho correcto en unidades de UI
+        float canvasWidth = ((RectTransform)transitionPanel.parent).rect.width;
 
+        float startX = isReverse ? -canvasWidth : canvasWidth;
+        float exitX = isReverse ? canvasWidth : -canvasWidth;
+
+        // Primer movimiento: Entra el panel (llega a 0)
         yield return MovePanel(startX, 0);
 
         SceneManager.LoadScene(sceneName);
+        
+        // Esperar un frame para que la escena cargue y evitar tirones
         yield return null;
 
+        // Segundo movimiento: Sale el panel (va hacia el lado opuesto)
         yield return MovePanel(0, exitX);
     }
 
@@ -80,7 +87,7 @@ public class TransitionManager : MonoBehaviour
 
     IEnumerator BlinkRoutine(Action accionWhileClosed)
     {
-        float middleWindow = Screen.height / 2f;
+        float middleWindow = ((RectTransform)topEyelid.parent).rect.height / 2f;
         float elapsedTime = 0f;
         
         while (elapsedTime < blinkSpeed) {

@@ -1189,22 +1189,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TransitionCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 2320584626260063609, guid: 109c269dc0b7d4e44977c5ed590971b7, type: 3}
-      propertyPath: m_UiScaleMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2320584626260063609, guid: 109c269dc0b7d4e44977c5ed590971b7, type: 3}
-      propertyPath: m_MatchWidthOrHeight
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2320584626260063609, guid: 109c269dc0b7d4e44977c5ed590971b7, type: 3}
-      propertyPath: m_ReferenceResolution.x
-      value: 1920
-      objectReference: {fileID: 0}
-    - target: {fileID: 2320584626260063609, guid: 109c269dc0b7d4e44977c5ed590971b7, type: 3}
-      propertyPath: m_ReferenceResolution.y
-      value: 1080
-      objectReference: {fileID: 0}
     - target: {fileID: 5208963681874763219, guid: 109c269dc0b7d4e44977c5ed590971b7, type: 3}
       propertyPath: topEyelid
       value: 
