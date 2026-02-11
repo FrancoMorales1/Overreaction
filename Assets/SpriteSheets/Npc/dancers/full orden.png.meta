@@ -1,0 +1,764 @@
+fileFormatVersion: 2
+guid: d844c6e8e61d1c244bc9320bec476ff4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8543692333668709855
+    second: full orden_0
+  - first:
+      213: -5751791168395029718
+    second: full orden_1
+  - first:
+      213: -2745208966814141857
+    second: full orden_2
+  - first:
+      213: 4119842653981403141
+    second: full orden_3
+  - first:
+      213: -7946221782354027516
+    second: full orden_4
+  - first:
+      213: 2323765913239368117
+    second: full orden_5
+  - first:
+      213: -7613776461242913710
+    second: full orden_6
+  - first:
+      213: -9095618934737372692
+    second: full orden_7
+  - first:
+      213: 2571936181336787196
+    second: full orden_8
+  - first:
+      213: -5190604961179432425
+    second: full orden_9
+  - first:
+      213: 768520813830143864
+    second: full orden_10
+  - first:
+      213: -7270232631995300251
+    second: full orden_11
+  - first:
+      213: 8759575858569150501
+    second: full orden_12
+  - first:
+      213: -6377015942660426249
+    second: full orden_13
+  - first:
+      213: -9206117084758412165
+    second: full orden_14
+  - first:
+      213: 5614936741425321032
+    second: full orden_15
+  - first:
+      213: -4196241830549427791
+    second: full orden_16
+  - first:
+      213: -486167403796520388
+    second: full orden_17
+  - first:
+      213: 1277732768114260148
+    second: full orden_18
+  - first:
+      213: 481087764227693800
+    second: full orden_19
+  - first:
+      213: 1753998111837913464
+    second: full orden_20
+  - first:
+      213: 8740934508529417465
+    second: full orden_21
+  - first:
+      213: -6298603628471529917
+    second: full orden_22
+  - first:
+      213: -9117688735325495682
+    second: full orden_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: full orden_0
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 1434
+        width: 70
+        height: 227
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd53d8a39ea419670800000000000000
+      internalID: 8543692333668709855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full orden_1
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 1667
+        width: 70
+        height: 227
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a23d59918688d20b0800000000000000
+      internalID: -5751791168395029718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full orden_2
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 1643
+        width: 86
+        height: 211
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5273da4dfe07e9d0800000000000000
+      internalID: -2745208966814141857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full orden_3
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 1656
+        width: 114
+        height: 191
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5086011e01f9c2930800000000000000
+      internalID: 4119842653981403141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full orden_4
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 1433
+        width: 86
+        height: 187
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40c115cc36959b190800000000000000
+      internalID: -7946221782354027516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full orden_5
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 1442
+        width: 114
+        height: 172
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b13bc749ccaf3020800000000000000
+      internalID: 2323765913239368117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full orden_6
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 1233
+        width: 72
+        height: 196
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25ca264e5ae665690800000000000000
+      internalID: -7613776461242913710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full orden_7
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 1229
+        width: 67
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce979aef4ced5c180800000000000000
+      internalID: -9095618934737372692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full orden_8
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 1229
+        width: 94
+        height: 198
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf8cd89845a51b320800000000000000
+      internalID: 2571936181336787196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full orden_9
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 1025
+        width: 72
+        height: 196
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71a058fe94447f7b0800000000000000
+      internalID: -5190604961179432425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full orden_10
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 1020
+        width: 67
+        height: 178
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87ff6debb955aaa00800000000000000
+      internalID: 768520813830143864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full orden_11
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 1021
+        width: 94
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5668777c0f1fa1b90800000000000000
+      internalID: -7270232631995300251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full orden_12
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 789
+        width: 74
+        height: 223
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5200a1945d3409970800000000000000
+      internalID: 8759575858569150501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full orden_13
+      rect:
+        serializedVersion: 2
+        x: 439
+        y: 789
+        width: 68
+        height: 169
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f5f8ba79c94087a0800000000000000
+      internalID: -6377015942660426249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full orden_14
+      rect:
+        serializedVersion: 2
+        x: 610
+        y: 789
+        width: 83
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b74f15a994d4d3080800000000000000
+      internalID: -9206117084758412165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full orden_15
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 547
+        width: 74
+        height: 223
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84412f497334ced40800000000000000
+      internalID: 5614936741425321032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full orden_16
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 547
+        width: 68
+        height: 169
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b9677aa944f3c5c0800000000000000
+      internalID: -4196241830549427791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full orden_17
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 509
+        width: 83
+        height: 245
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c32a5537259c049f0800000000000000
+      internalID: -486167403796520388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full orden_18
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 293
+        width: 72
+        height: 196
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b8b351de2b6bb110800000000000000
+      internalID: 1277732768114260148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full orden_19
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 288
+        width: 67
+        height: 178
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ec149cc5ca2da600800000000000000
+      internalID: 481087764227693800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full orden_20
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 289
+        width: 94
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8710ec85df3775810800000000000000
+      internalID: 1753998111837913464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full orden_21
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 50
+        width: 72
+        height: 222
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fc79d1cf990e4970800000000000000
+      internalID: 8740934508529417465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full orden_22
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 71
+        width: 67
+        height: 178
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34ec7ff0f5dd698a0800000000000000
+      internalID: -6298603628471529917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full orden_23
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 72
+        width: 94
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7ed75e1766777180800000000000000
+      internalID: -9117688735325495682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: full orden_24
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 1653
+        width: 450
+        height: 251
+      alignment: 9
+      pivot: {x: 0.50264007, y: 0.5404749}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bfbcaff682dedc4d85da9eb0c5672a2
+      internalID: -700963433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 3bc19f4787293514b9d0f7c63a9c06b9
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      full orden_0: 8543692333668709855
+      full orden_1: -5751791168395029718
+      full orden_10: 768520813830143864
+      full orden_11: -7270232631995300251
+      full orden_12: 8759575858569150501
+      full orden_13: -6377015942660426249
+      full orden_14: -9206117084758412165
+      full orden_15: 5614936741425321032
+      full orden_16: -4196241830549427791
+      full orden_17: -486167403796520388
+      full orden_18: 1277732768114260148
+      full orden_19: 481087764227693800
+      full orden_2: -2745208966814141857
+      full orden_20: 1753998111837913464
+      full orden_21: 8740934508529417465
+      full orden_22: -6298603628471529917
+      full orden_23: -9117688735325495682
+      full orden_24: -700963433
+      full orden_3: 4119842653981403141
+      full orden_4: -7946221782354027516
+      full orden_5: 2323765913239368117
+      full orden_6: -7613776461242913710
+      full orden_7: -9095618934737372692
+      full orden_8: 2571936181336787196
+      full orden_9: -5190604961179432425
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
