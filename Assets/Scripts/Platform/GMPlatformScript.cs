@@ -193,16 +193,32 @@ public class GMPlatformScript : MonoBehaviour
         return false;
     }
 
+    [Header("Animación")]
+    [SerializeField] private Animator notificationAnimator; // Arrastra aquí el Animator
+    [SerializeField] private float outAnimationTime = 0.5f; // Lo que dura tu clip 'pop_out'
+
     private IEnumerator ShowNotificationRoutine()
     {
         notificationShown = true;
-        if (notificationPanel != null)
-        {
-            notificationPanel.SetActive(true);
 
+        if (notificationPanel != null && notificationAnimator != null)
+        {
+            // 1. Activa el objeto y dispara la entrada
+            notificationPanel.SetActive(true);
+            notificationAnimator.SetTrigger("Show");
+
+            // 2. Espera el tiempo que la notificación debe estar visible
             yield return new WaitForSeconds(displayTime);
 
+            // 3. Dispara la salida (pop_out)
+            notificationAnimator.SetTrigger("Hide");
+
+            // 4. ¡IMPORTANTE! Espera a que la animación termine antes de ocultar el objeto
+            yield return new WaitForSeconds(outAnimationTime);
+
+            // 5. Ahora sí, lo apagamos
             notificationPanel.SetActive(false);
+            notificationShown = false; // Reset para poder mostrarla de nuevo después
         }
     }
 

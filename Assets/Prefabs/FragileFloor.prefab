@@ -104,7 +104,7 @@ Animator:
   m_GameObject: {fileID: 2713262481874636560}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 94a170f9c69c00a4ab2148e8a277c87c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -176,3 +176,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::fragilePlatformScript
   timeForBreak: 0.5
   respawnTime: 5
+  fadeInDuration: 0.8
