@@ -61,7 +61,7 @@ public class JohnMovement : MonoBehaviour
             Grounded = false;
         }
 
-        if (Keyboard.current.upArrowKey.wasPressedThisFrame && Grounded)
+        if ((Keyboard.current.upArrowKey.wasPressedThisFrame || Keyboard.current.wKey.wasPressedThisFrame) && Grounded)
         {
             Jump();
         }
